@@ -8,6 +8,9 @@ import Tab from '@material-ui/core/Tab'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
+import {
+  Link
+} from "react-router-dom"
 
 function TabPanel(props) {
   //MIDDLE AUTOMATIC SCROLL BUTTONS 
@@ -49,6 +52,9 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     backgroundColor: theme.palette.background.paper,
   },
+  menu: {
+    backgroundColor: '#33334d',
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -59,8 +65,6 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 545,
     padding: '20px',
     position:'center',
-
-
   },
   media: {
     height: 140,
@@ -83,7 +87,7 @@ export default function ScrollableTabsButtonAuto() {
   return (
      <div className={classes.root}>
        <AppBar position="static">
-          <Toolbar>
+          <Toolbar className={classes.menu}>
             <Typography variant="h6" className={classes.title}>
                <h1> PATHFINDER</h1>
             </Typography>
@@ -102,13 +106,21 @@ export default function ScrollableTabsButtonAuto() {
             scrollButtons="auto"
             aria-label="scrollable auto tabs example"
             >
-            <Tab label="ETUSIVU" {...a11yProps(0)} />
-            <Tab label="KERROSTALO" {...a11yProps(1)} />
-            <Tab label="OMAKOTITALO" {...a11yProps(2)} />
-            <Tab label="VINKIT" {...a11yProps(3)} />
-            <Tab label="KOKEMUKSIA" {...a11yProps(4)} />
-            <Tab label="YHTEYSTIEDOT" {...a11yProps(5)} />
-            <Tab label="MUU" {...a11yProps(6)} />
+              <Link to="/">
+                <Tab label="Home page" {...a11yProps(0)} />
+              </Link>
+              <Link to="/building">
+                <Tab label="Building type" {...a11yProps(0)} to="/building"/>
+              </Link>
+              <Link to="/materials">
+                <Tab label="Materials" {...a11yProps(0)} to="/materials"/>
+              </Link>
+              <Link to="/objects">
+                <Tab label="Objects" {...a11yProps(0)} to="/objects"/>
+              </Link>
+              <Link to="/calculate">
+                <Tab label="Calculate" {...a11yProps(0)} to="/calculate"/>
+              </Link>
           </Tabs>
         </AppBar>
     </div>
