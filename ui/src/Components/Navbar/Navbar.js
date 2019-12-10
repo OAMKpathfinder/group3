@@ -60,6 +60,7 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
+    margin: '20px'
   },
   card: {
     maxWidth: 545,
@@ -69,7 +70,9 @@ const useStyles = makeStyles(theme => ({
   media: {
     height: 140,
   },
-   
+  link: {
+    textDecoration: 'none'
+  } 
 })
 );
 
@@ -88,16 +91,14 @@ export default function ScrollableTabsButtonAuto() {
      <div className={classes.root}>
        <AppBar position="static">
           <Toolbar className={classes.menu}>
-            <Typography variant="h6" className={classes.title}>
-               <h1> PATHFINDER</h1>
+            <Typography variant="h4" className={classes.title}>
+              PATHFINDER
             </Typography>
-            <Button color="inherit">FI</Button>
-            <Button color="inherit">ENG</Button>
-            <Button color="inherit">SV</Button>
           </Toolbar>
         </AppBar>
         <AppBar position="static" color="default">
           <Tabs
+            className={classes.link}
             value={value}
             onChange={handleChange}
             indicatorColor="primary"
@@ -106,19 +107,19 @@ export default function ScrollableTabsButtonAuto() {
             scrollButtons="auto"
             aria-label="scrollable auto tabs example"
             >
-              <Link to="/">
+              <Link className={classes.link} to="/">
                 <Tab label="Home page" {...a11yProps(0)} />
               </Link>
-              <Link to="/building">
+              <Link className={classes.link} to="/building">
                 <Tab label="Building type" {...a11yProps(0)} to="/building"/>
               </Link>
-              <Link to="/materials">
+              <Link className={classes.link} to="/materials">
                 <Tab label="Materials" {...a11yProps(0)} to="/materials"/>
               </Link>
-              <Link to="/objects">
+              <Link className={classes.link} to="/objects">
                 <Tab label="Objects" {...a11yProps(0)} to="/objects"/>
               </Link>
-              <Link to="/calculate">
+              <Link className={classes.link} to="/calculate">
                 <Tab label="Calculate" {...a11yProps(0)} to="/calculate"/>
               </Link>
           </Tabs>
