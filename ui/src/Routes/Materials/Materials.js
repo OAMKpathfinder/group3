@@ -21,6 +21,7 @@ import ChevronRight from '@material-ui/icons/ChevronRight';
 import FirstPage from '@material-ui/icons/FirstPage';
 import LastPage from '@material-ui/icons/LastPage';
 import DeleteOutline from '@material-ui/icons/DeleteOutline';
+import axios from 'axios';
 
 const tableIcons = {
   Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
@@ -30,7 +31,6 @@ const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
   Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
   Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-  Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
   FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
   LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
   NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
@@ -60,22 +60,35 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+
+
+
+
+
 function Materials() {
   const classes = useStyles();
-  
   const [state, setState] = React.useState({
     columns: [
-      { title: 'Material', field: 'material' },
-      { title: 'U-Value', field: 'uValue', type: 'numeric' }
+      { title: 'Id', field: 'materialsid' },
+      { title: 'abbreviation', field: 'abbreviation' },
+      { title: 'Material', field: 'materialname' },
+      { title: 'U-Value', field: 'coefficient', type: 'numeric' }
     ],
-    data: [
-      { material: 'Stone', uValue: 1987 },
-      {
-        material: 'Glass',
-        uValue: 2017
-      },
-    ],
+    data:[]
   });
+  
+
+
+
+  axios.get(`https://pathfinderserverrestapi.azurewebsites.net/materials`).then(res => {
+    const _lstMaterilas = res.data;
+
+
+    state.data = _lstMaterilas;
+    //alert(state.data[0]);
+
+  });
+
 
   return (
     <Card className={classes.card}>
@@ -83,65 +96,65 @@ function Materials() {
         title="Materials"
       />
       <Divider />
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Building materials with the corresponding heat transmittance values are available on this page. 
+      <CardContent>
+        <Typography variant="body2" color="textSecondary" component="p">
+          Building materials with the corresponding heat transmittance values are available on this page.
           </Typography>
-        </CardContent> 
+      </CardContent>
       <Paper className={classes.root}>
         <form noValidate autoComplete="off">
           <TextField className={classes.text} id="filled-basic" label="Material name" variant="filled" />
           <TextField className={classes.text} id="filled-basic" label="Heat transmittance value" variant="filled" />
           <Button className={classes.button} variant="contained" color="primary">
-          Add
+            Add
         </Button>
         </form>
         <Divider />
         <div>
-        <div className={classes.demo}>
-        <MaterialTable
-          icons={tableIcons}
-          title="Materials"
-          columns={state.columns}
-          data={state.data}
-          editable={{
-            onRowAdd: newData =>
-            new Promise(resolve => {
-            setTimeout(() => {
-              resolve();
-              setState(prevState => {
-                const data = [...prevState.data];
-                data.push(newData);
-                return { ...prevState, data };
-              });
-              }, 600);
-            }),
-            onRowUpdate: (newData, oldData) =>
-            new Promise(resolve => {
-            setTimeout(() => {
-              resolve();
-              if (oldData) {
-                setState(prevState => {
-                  const data = [...prevState.data];
-                  data[data.indexOf(oldData)] = newData;
-                  return { ...prevState, data };
-                });
-              }
-            }, 600);
-          }),
-        onRowDelete: oldData =>
-          new Promise(resolve => {
-            setTimeout(() => {
-              resolve();
-              setState(prevState => {
-                const data = [...prevState.data];
-                data.splice(data.indexOf(oldData), 1);
-                return { ...prevState, data };
-              });
-                }, 600);
-              }),
+          <div className={classes.demo}>
+            <MaterialTable
+              icons={tableIcons}
+              title="Materials"
+              columns={state.columns}
+              data={state.data}
+              editable={{
+                onRowAdd: newData =>
+                  new Promise(resolve => {
+                    setTimeout(() => {
+                      resolve();
+                      setState(prevState => {
+                        const data = [...prevState.data];
+                        data.push(newData);
+                        return { ...prevState, data };
+                      });
+                    }, 600);
+                  }),
+                onRowUpdate: (newData, oldData) =>
+                  new Promise(resolve => {
+                    setTimeout(() => {
+                      resolve();
+                      if (oldData) {
+                        setState(prevState => {
+                          const data = [...prevState.data];
+                          data[data.indexOf(oldData)] = newData;
+                          return { ...prevState, data };
+                        });
+                      }
+                    }, 600);
+                  }),
+                onRowDelete: oldData =>
+                  new Promise(resolve => {
+                    setTimeout(() => {
+                      resolve();
+                      setState(prevState => {
+                        const data = [...prevState.data];
+                        data.splice(data.indexOf(oldData), 1);
+                        return { ...prevState, data };
+                      });
+                    }, 600);
+                  }),
               }}
-              />
+            />
           </div>
         </div>
       </Paper>
