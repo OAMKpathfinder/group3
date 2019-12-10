@@ -22,6 +22,7 @@ import FirstPage from '@material-ui/icons/FirstPage';
 import LastPage from '@material-ui/icons/LastPage';
 import DeleteOutline from '@material-ui/icons/DeleteOutline';
 import axios from 'axios';
+
 const tableIcons = {
   Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
   Edit: forwardRef((props, ref) => <EditIcon {...props} ref={ref} />),
@@ -87,7 +88,6 @@ function Materials() {
     //alert(state.data[0]);
 
   });
-
 
 
   return (
