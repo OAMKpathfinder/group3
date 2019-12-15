@@ -1,0 +1,27 @@
+.card {
+    margin-top: '20px';
+    width: '100%';
+    margin: '5px'
+  }
+.results {
+    margin: '30px'
+  }
+.text {
+    margin-left: '30px'
+  }
+
+.button {
+    width: '20%';
+    margin: '20px'
+  }
+.progress {
+    margin: '50px';
+    width: '80%'
+}
+.area {
+    color: '#fff';
+    background-color:  '#993300';
+    margin: '10px'
+}
+.av {
+  }

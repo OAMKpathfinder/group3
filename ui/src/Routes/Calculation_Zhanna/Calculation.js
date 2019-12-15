@@ -245,7 +245,7 @@ function Result() {
             <br></br>
             <Divider />
             <br></br>
-            <Link to="/calculate/results">
+            <Link to="/result/1">
               <Button variant="contained" color="primary">Calculate</Button>
             </Link>
           </Paper>
