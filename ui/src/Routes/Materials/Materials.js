@@ -1,12 +1,9 @@
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
 import ReactDataGrid from "react-data-grid";
-
-
 import axios from 'axios';
 import './Materials.css';
 const baseclsUrl = 'https://pathfinderserverrestapi.azurewebsites.net/materials';
-const COLUMN_WIDTH = 140;
 
 const columns = [
     {
@@ -127,7 +124,7 @@ class materials extends Component {
             coefficient: this.myDivcoefficient.value
         }
 
-        if (this.frmStatus == 1) {
+        if (this.frmStatus === 1) {
 
             axios
                 .post('https://pathfinderserverrestapi.azurewebsites.net/materials/', PostData)
@@ -137,7 +134,7 @@ class materials extends Component {
 
 
         }
-        if (this.frmStatus == 0) {
+        if (this.frmStatus === 0) {
 
             axios
                 .put('https://pathfinderserverrestapi.azurewebsites.net/materials/' + this.myDivid.value, PostData)
@@ -186,11 +183,11 @@ class materials extends Component {
     }
 
     rowselect(iRowIdx) {
-        if (iRowIdx == -99) {
+        if (iRowIdx === -99) {
 
         } else {
 
-            if ((this.state.lstDataList.length > 0) && (this.frmStatus == 0)) {
+            if ((this.state.lstDataList.length > 0) && (this.frmStatus === 0)) {
                 this.selected_row = iRowIdx;
                 let cust = this.state.lstDataList[iRowIdx];
                 this.myDivid.value = cust["materialsid"];
@@ -206,7 +203,6 @@ class materials extends Component {
     }
 
     render() {
-
         return (
 
             <div className="mainDiv_">

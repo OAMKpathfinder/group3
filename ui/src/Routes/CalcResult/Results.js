@@ -1,41 +1,42 @@
-import React, { PureComponent } from 'react'
-import { PieChart, Pie, Sector } from 'recharts';
-import { forwardRef } from 'react';
-import { makeStyles } from '@material-ui/core/styles'
+import React, { Component } from 'react'
+// import { PieChart, Pie, Sector } from 'recharts';
+// import { forwardRef } from 'react';
+// import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import Typography from '@material-ui/core/Typography'
 import CardHeader from '@material-ui/core/CardHeader';
 import Divider from '@material-ui/core/Divider';
 import CardContent from '@material-ui/core/CardContent';
+import axios from 'axios';
 import './Results.css'
 
-const data01 = [
-  { name: 'Group A', value: 400 }, { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 }, { name: 'Group D', value: 200 },
-];
-const data02 = [
-  { name: 'A1', value: 100 },
-  { name: 'A2', value: 300 },
-  { name: 'B1', value: 100 },
-  { name: 'B2', value: 80 },
-  { name: 'B3', value: 40 },
-  { name: 'B4', value: 30 },
-  { name: 'B5', value: 50 },
-  { name: 'C1', value: 100 },
-  { name: 'C2', value: 200 },
-  { name: 'D1', value: 150 },
-  { name: 'D2', value: 50 },
-];
+const baseclsUrl = 'https://pathfinderserverrestapi.azurewebsites.net//buildingstouserdetail/gtdet/19';
 
 
-export default class Results extends PureComponent {
-  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/hqnrgxpj/';
 
-  onPieEnter = (data, index) => {
-    this.setState({
-      activeIndex: index,
+class Results extends Component {
+  constructor() {
+    super();
+    this.getDataList = this.getDataList.bind(this);
+    this.state = {
+        lstDataList: []
+    };
+    this.getDataList();
+  }
+
+  getDataList() {
+    axios.get(baseclsUrl).then(res => {
+        const _lstDataList = res.data;
+        if (_lstDataList.length > 0) {
+
+            this.setState({ lstDataList: _lstDataList });
+            console.log(this.lstDataList);
+        }
+
+
     });
-  };
+  }
+  
   render() {
     return (
       <Card className='card'>
@@ -59,10 +60,6 @@ export default class Results extends PureComponent {
             <Typography className='text'>
               Current value:
             </Typography>
-            <PieChart width={400} height={400}>
-              <Pie data={data01} dataKey="value" cx={200} cy={200} outerRadius={60} fill="#8884d8" />
-              <Pie data={data02} dataKey="value" cx={200} cy={200} innerRadius={70} outerRadius={90} fill="#82ca9d" label />
-            </PieChart>
           </div>
           <br></br>
           <div className='av'>
@@ -76,3 +73,5 @@ export default class Results extends PureComponent {
     );
     }
   }
+
+export default Results;

@@ -1,17 +1,9 @@
 //import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { Component } from 'react';
-import ReactDOM from "react-dom";
+import React, { Component } from 'react'
 import ReactDataGrid from "react-data-grid";
-
-import Button from 'react-bootstrap/lib/Button';
-
-import ReactTable from 'react-table';
-
-
 import axios from 'axios';
 import './Building.css';
 const baseclsUrl = 'https://pathfinderserverrestapi.azurewebsites.net/buildingtypes';
-const COLUMN_WIDTH = 140;
 
 const columns = [
     {
