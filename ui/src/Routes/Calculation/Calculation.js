@@ -10,18 +10,18 @@ const columns = [
     {
         key: "buildingstouserdetailid",
         name: "ID",
-        width: 150
+        width: 50
     },
     {
         key: "objectname",
         name: "Object name",
 
-        width: 250
+        width: 150
     },
     {
         key: "curmatname",
         name: "Present Material",
-        width: 300
+        width: 150
 
     },
     {
@@ -32,22 +32,22 @@ const columns = [
     {
         key: "numberofobjects",
         name: "Objects No",
-        width: 150
+        width: 100
     },
     {
         key: "objectarea",
         name: "Object area",
-        width: 150
+        width: 100
     },
     {
         key: "presentvalue",
         name: "Current Value",
-        width: 150
+        width: 100
     },
     {
         key: "newvalue",
         name: "New Value",
-        width: 150
+        width: 100
     },
 
 ];
@@ -56,7 +56,7 @@ const columns = [
 class calculate extends Component {
     constructor() {
         super();
-        this.myDivMat=0;
+
         this.getDataList = this.getDataList.bind(this);
         this.getObjectsList = this.getObjectsList.bind(this);
         this.getMaterialList = this.getMaterialList.bind(this);
@@ -81,14 +81,14 @@ class calculate extends Component {
         };
         this.lstObjectDataList = [];
         this.lstMaterialsDataList = [];
-       
+
     }
-    componentDidMount(){
+    componentDidMount() {
         this.getDataList();
         this.getObjectsList();
         this.getMaterialList();
-      }
-    
+    }
+
     CreateGrid() {
         return (
             <div>
@@ -111,16 +111,15 @@ class calculate extends Component {
                 this.btnCancel.style.visibility = "visible";
                 break;
             case 1:
-                this.btnNew.style.visibility = "visible";
+                this.btnNew.style.visibility = "hidden";
                 this.btnDel.style.visibility = "hidden";
                 this.btnSave.style.visibility = "visible";
                 this.btnCancel.style.visibility = "visible";
-
-
-                // this.myDivid.value = 0;
-                // this.myDivAbbr.value = '';
-                // this.myDivName.value = '';
-                // this.myDivformula.value = "";
+                // this.myDivObj.value = 0;
+                //this.myDivMat.value = 0;
+                this.myDivNumber.value = 0;
+                this.myDivArea.value = 0;
+                //this.myDivNewMat.value = 0;
                 break;
 
 
@@ -149,8 +148,13 @@ class calculate extends Component {
     handleSaveClick() {
         const PostData = {
 
-            // objectname: this.myDivName.value,
-            // formula: this.myDivformula.value
+            objectsid: this.myDivObj.value,
+            materialsid: this.myDivMat.value,
+            numberofobjects: this.myDivNumber.value,
+            objectarea: this.myDivArea.value,
+            //newmaterialsid: this.myDivNewMat.value
+
+
         }
 
         if (this.frmStatus === 1) {
@@ -228,11 +232,13 @@ class calculate extends Component {
 
                 this.selected_row = iRowIdx;
                 let cust = this.state.lstDataList[iRowIdx];
-                alert(this.myDivMat.value);
-                // this.myDivid.value = cust["buildingtypeid"];
-                // this.myDivAbbr.value = cust["abbreviation"];
-                // this.myDivName.value = cust["objectname"];
-                // this.myDivformula.value = cust["formula"];
+
+                this.myDivid.value = cust["buildingstouserdetailid"];
+                this.myDivObj.value = cust["objectsid"];
+                this.myDivMat.value = cust["materialsid"];
+                this.myDivNewMat.value = cust["newmaterialsid"];
+                this.myDivArea.value = cust["objectarea"];
+                this.myDivNumber.value = cust["numberofobjects"];
 
 
             }
@@ -250,8 +256,9 @@ class calculate extends Component {
                     <table className="tblsMain_">
                         <tbody>
                             <tr className="trbtn_">
+                                <td className="trbtn_"></td>
                                 <td className="trbtn_">
-                                    <button className="btn btn-dark btn-lg btn-block" onClick={this.handleNewClick} ref={c => this.btnNew = c}>New</button>
+                                    <button onClick={this.handleNewClick} ref={c => this.btnNew = c}>New</button>
                                 </td>
 
                                 <td className="trbtn_">
@@ -268,33 +275,51 @@ class calculate extends Component {
                             <tr className="trElm_">
                                 <td className="tdElements_" >
                                     <tr>
-                                        <td className="td_">Type Id</td>
+                                        <td className="td_">Id</td>
                                         <td>
                                             <input type="number" name="idField" ref={c => this.myDivid = c} style={{ width: 100, borderColor: 'gray', borderWidth: 1 }} disabled />
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td className="td_">Abbreviation</td>
+                                        <td className="td_">Object </td>
                                         <td>
-                                            <select  ref={c => this.myDivMat = c}>
+                                            <select ref={c => this.myDivObj = c}>
+                                                {this.lstObjectDataList.map((team) => <option key={team.objectname} value={team.objectsid}>{team.objectname}</option>)}
+                                            </select>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="td_">Current material</td>
+                                        <td>
+                                            <select ref={c => this.myDivMat = c}>
                                                 {this.lstMaterialsDataList.map((team) => <option key={team.materialname} value={team.materialsid}>{team.materialname}</option>)}
                                             </select>
 
-                                            {/* <input type="text" name="abbreviation" ref={c => this.myDivAbbr = c} style={{ width: 100, borderColor: 'gray', borderWidth: 1 }} disabled /> */}
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td className="td_">Object name</td>
+                                        <td className="td_">New material</td>
                                         <td>
-                                            <input type="text" name="objectname" ref={c => this.myDivName = c} style={{ width: 200, borderColor: 'gray', borderWidth: 1 }} />
+                                            <select ref={c => this.myDivNewMat = c}>
+                                                {this.lstMaterialsDataList.map((team) => <option key={team.materialname} value={team.materialsid}>{team.materialname}</option>)}
+                                            </select>
+
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td className="td_">formula</td>
+                                        <td className="td_">Area </td>
                                         <td>
-                                            <textarea name="formula" ref={c => this.myDivformula = c} style={{ height: 150, width: 400, borderColor: 'gray', borderWidth: 1 }} />
+                                            <input type="number" placeholder="0.00" step="0.01" name="objectarea" ref={c => this.myDivArea = c} style={{ width: 200, borderColor: 'gray', borderWidth: 1 }} />
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td className="td_">Number Of objects </td>
+                                        <td>
+                                            <input type="number" placeholder="0" step="1" name="numberofobjects" ref={c => this.myDivNumber = c} style={{ width: 200, borderColor: 'gray', borderWidth: 1 }} />
+                                        </td>
+                                    </tr>
+
                                 </td>
 
                             </tr>

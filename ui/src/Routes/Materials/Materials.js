@@ -58,21 +58,7 @@ class materials extends Component {
         this.getDataList();
     }
 
-    CreateGrid() {
-        return (
-            <div>
-                <ReactDataGrid
-                    columns={columns}
-                    rowGetter={i => this.state.lstDataList[i]}
-                    rowsCount={this.state.lstDataList.length}
-                    onRowClick={this.rowselect}
-
-
-                />
-            </div>
-        );
-
-    }
+    
     showButt() {
         switch (this.frmStatus) {
             case 0:
@@ -82,7 +68,7 @@ class materials extends Component {
                 this.btnCancel.style.visibility = "visible";
                 break;
             case 1:
-                this.btnNew.style.visibility = "visible";
+                this.btnNew.style.visibility = "hidden";
                 this.btnDel.style.visibility = "hidden";
                 this.btnSave.style.visibility = "visible";
                 this.btnCancel.style.visibility = "visible";
@@ -209,6 +195,24 @@ class materials extends Component {
                 <div className="Top_">
                     <table className="tblsMain_">
                         <tbody>
+                        <tr className="trbtn_">
+                                <td className="trbtn_"></td>
+                                <td className="trbtn_">
+                                    <button onClick={this.handleNewClick} ref={c => this.btnNew = c}>New</button>
+                                </td>
+
+                                <td className="trbtn_">
+                                    <button className="btn btn-danger btn-lg btn-block" onClick={this.handleDelClick} ref={c => this.btnDel = c}>Delete</button>
+                                </td>
+                                <td className="trbtn_">
+                                    <button className="btn btn-success btn-lg btn-block" onClick={this.handleSaveClick} ref={c => this.btnSave = c} >Save</button>
+                                </td>
+                                <td className="trbtn_">
+                                    <button className="btn btn-secondary btn-lg btn-block" onClick={this.handleCancelClick} ref={c => this.btnCancel = c}>Cancel</button>
+                                </td>
+
+                            </tr>
+                            <tr className="trElm_">
                             <td className="tdElements_" >
                                 <tr>
                                     <td className="td_">Materid Id</td>
@@ -235,33 +239,7 @@ class materials extends Component {
                                     </td>
                                 </tr>
                             </td>
-                            <td className="tdBtns_" >
-                                <td>
-                                    <tr>
-                                        <button className="btn btn-dark btn-lg btn-block" onClick={this.handleNewClick} ref={c => this.btnNew = c}>New</button>
-                                    </tr>
-                                    <tr><p></p></tr>
-                                    <tr>
-                                        <button className="btn btn-danger btn-lg btn-block" onClick={this.handleDelClick} ref={c => this.btnDel = c}>Delete</button>
-
-                                    </tr>
-
-                                </td>
-                                <td>
-                                    <tr>
-                                        <button className="btn btn-success btn-lg btn-block" onClick={this.handleSaveClick} ref={c => this.btnSave = c} >Save</button>
-                                    </tr>
-                                    <tr><p></p></tr>
-                                    <tr>
-                                        <button className="btn btn-secondary btn-lg btn-block" onClick={this.handleCancelClick} ref={c => this.btnCancel = c}>Cancel</button>
-
-                                    </tr>
-
-                                </td>
-
-
-                            </td>
-
+                            </tr>
                         </tbody>
                     </table>
                 </div>
