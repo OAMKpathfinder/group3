@@ -112,20 +112,20 @@ export default function ScrollableTabsButtonAuto() {
             scrollButtons="auto"
             aria-label="scrollable auto tabs example"
             >
-              <Link className={classes.link} to="/">
-                <Tab label="Home page" {...a11yProps(0)} />
-              </Link>
               <Link className={classes.link} to="/building">
                 <Tab label="Building type" {...a11yProps(0)} to="/building"/>
               </Link>
               <Link className={classes.link} to="/materials">
-                <Tab label="Materials" {...a11yProps(0)} to="/materials"/>
+                <Tab label="Materials" {...a11yProps(1)} to="/materials"/>
               </Link>
               <Link className={classes.link} to="/objects">
-                <Tab label="Objects" {...a11yProps(0)} to="/objects"/>
+                <Tab label="Objects" {...a11yProps(2)} to="/objects"/>
               </Link>
               <Link className={classes.link} to="/calculate">
-                <Tab label="Calculate" {...a11yProps(0)} to="/calculate"/>
+                <Tab label="Calculate" {...a11yProps(3)} to="/calculate"/>
+              </Link>
+              <Link className={classes.link} to="/result">
+                <Tab label="Result" {...a11yProps(4)} to="/result"/>
               </Link>
           </Tabs>
         </AppBar>
