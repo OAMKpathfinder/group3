@@ -13,10 +13,10 @@ function Buildings() {
   const classes = useStyles();
 
   const images = [
-    { url: "1.png" },
-    { url: "./Calculation/2.png" },
-    { url: "3.png" },
-    { url: "4.png" }
+    { url:"http://www.bokorrenovation.com/wp-content/uploads/2015/02/Master-Small-Bathroom-Remodels.jpg" },
+    { url: "https://upload.wikimedia.org/wikipedia/commons/2/2d/Huvilakatu_omakotitalo.jpg" },
+    { url: "https://assets.meillakotona.fi/w7lrg8grgqb7/meillakotona_file_125088/eb868274e5a121ee1bed03ef76b8a303/MT_korjaa_oikein_50_luvun_talo_cEftZ.jpg?w=1536&q=75&fit=crop-center" },
+    { url: "https://designmag.fr/wp-content/uploads/2015/02/bibliotheque-piece-design-oval.jpg" }
   ];
 
   return (

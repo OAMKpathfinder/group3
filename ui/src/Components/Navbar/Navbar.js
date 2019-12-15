@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   menu: {
-    backgroundColor: '#33334d',
+    backgroundColor: '#6CC417',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -89,11 +89,11 @@ export default function ScrollableTabsButtonAuto() {
        <AppBar position="static">
           <Toolbar className={classes.menu}>
             <Typography variant="h6" className={classes.title}>
-               <h1> PATHFINDER</h1>
+               <h1> ENERGY PATHFINDER</h1>
             </Typography>
-            <Button color="inherit">FI</Button>
-            <Button color="inherit">ENG</Button>
-            <Button color="inherit">SV</Button>
+            <Button variant="outlined" color="inherit"><strong>Login</strong></Button>
+            <Button variant="outlined" color="inherit"><strong>Sign-up</strong></Button>
+            
           </Toolbar>
         </AppBar>
         <AppBar position="static" color="default">
