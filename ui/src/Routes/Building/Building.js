@@ -1,17 +1,15 @@
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
-import ReactDOM from "react-dom";
+
 import ReactDataGrid from "react-data-grid";
 
-import Button from 'react-bootstrap/lib/Button';
 
-import ReactTable from 'react-table';
 
 
 import axios from 'axios';
 import './Building.css';
 const baseclsUrl = 'https://pathfinderserverrestapi.azurewebsites.net/buildingtypes';
-const COLUMN_WIDTH = 140;
+
 
 const columns = [
     {
@@ -46,7 +44,7 @@ class building extends Component {
         this.getDataList = this.getDataList.bind(this);
 
         this.frmStatus = 0;
-       
+
         this.rowselect = this.rowselect.bind(this);
 
         //btn handler
@@ -56,7 +54,7 @@ class building extends Component {
         this.handleCancelClick = this.handleCancelClick.bind(this);
 
         this.showButt = this.showButt.bind(this);
-       
+
         this.CreateGrid = this.CreateGrid.bind(this);
 
         this.selected_row = 0;
@@ -66,21 +64,7 @@ class building extends Component {
         this.getDataList();
     }
 
-    CreateGrid() {
-        return (
-            <div>
-                <ReactDataGrid
-                    columns={columns}
-                    rowGetter={i => this.state.lstDataList[i]}
-                    rowsCount={this.state.lstDataList.length}
-                    onRowClick={this.rowselect}
 
-
-                />
-            </div>
-        );
-
-    }
     showButt() {
         switch (this.frmStatus) {
             case 0:
@@ -90,7 +74,7 @@ class building extends Component {
                 this.btnCancel.style.visibility = "visible";
                 break;
             case 1:
-                this.btnNew.style.visibility = "visible";
+                this.btnNew.style.visibility = "hidden";
                 this.btnDel.style.visibility = "hidden";
                 this.btnSave.style.visibility = "visible";
                 this.btnCancel.style.visibility = "visible";
@@ -113,12 +97,12 @@ class building extends Component {
         this.frmStatus = 1;
         this.showButt();
     }
-    handleDelClick(){
+    handleDelClick() {
         axios
-        .delete('https://pathfinderserverrestapi.azurewebsites.net/buildingtypes/'+ this.myDivid.value)
-        .then(res => {
-            this.getDataList();
-        });
+            .delete('https://pathfinderserverrestapi.azurewebsites.net/buildingtypes/' + this.myDivid.value)
+            .then(res => {
+                this.getDataList();
+            });
     }
     handleCancelClick() {
         this.frmStatus = 0;
@@ -132,7 +116,7 @@ class building extends Component {
             formula: this.myDivformula.value
         }
 
-        if (this.frmStatus == 1) {
+        if (this.frmStatus === 1) {
 
             axios
                 .post('https://pathfinderserverrestapi.azurewebsites.net/buildingtypes/', PostData)
@@ -142,7 +126,7 @@ class building extends Component {
 
 
         }
-        if (this.frmStatus == 0) {
+        if (this.frmStatus === 0) {
 
             axios
                 .put('https://pathfinderserverrestapi.azurewebsites.net/buildingtypes/' + this.myDivid.value, PostData)
@@ -191,11 +175,11 @@ class building extends Component {
     }
 
     rowselect(iRowIdx) {
-        if (iRowIdx == -99) {
+        if (iRowIdx === -99) {
 
         } else {
 
-            if ((this.state.lstDataList.length > 0) && (this.frmStatus == 0)) {
+            if ((this.state.lstDataList.length > 0) && (this.frmStatus === 0)) {
                 this.selected_row = iRowIdx;
                 let cust = this.state.lstDataList[iRowIdx];
                 this.myDivid.value = cust["buildingtypeid"];
@@ -218,59 +202,51 @@ class building extends Component {
                 <div className="Top_">
                     <table className="tblsMain_">
                         <tbody>
-                            <td className="tdElements_" >
-                                <tr>
-                                    <td className="td_">Type Id</td>
-                                    <td>
-                                        <input type="number" name="idField" ref={c => this.myDivid = c} style={{ width: 100, borderColor: 'gray', borderWidth: 1 }} disabled />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="td_">Abbreviation</td>
-                                    <td>
-                                        <input type="text" name="abbreviation" ref={c => this.myDivAbbr = c} style={{ width: 100, borderColor: 'gray', borderWidth: 1 }} disabled />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="td_">Type name</td>
-                                    <td>
-                                        <input type="text" name="typename" ref={c => this.myDivName = c} style={{ width: 200, borderColor: 'gray', borderWidth: 1 }}  />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="td_">formula</td>
-                                    <td>
-                                    <textarea name="formula" ref={c => this.myDivformula = c} style={{ height: 150, width: 400, borderColor: 'gray', borderWidth: 1 }}  />
-                                    </td>
-                                </tr>
-                            </td>
-                            <td className="tdBtns_" >
-                                <td>
-                                    <tr>
-                                        <button className="btn btn-dark btn-lg btn-block" onClick={this.handleNewClick} ref={c => this.btnNew = c}>New</button>
-                                    </tr>
-                                    <tr><p></p></tr>
-                                    <tr>
-                                        <button className="btn btn-danger btn-lg btn-block" onClick={this.handleDelClick} ref={c => this.btnDel = c}>Delete</button>
-
-                                    </tr>
-
-                                </td>
-                                <td>
-                                    <tr>
-                                        <button className="btn btn-success btn-lg btn-block" onClick={this.handleSaveClick} ref={c => this.btnSave = c} >Save</button>
-                                    </tr>
-                                    <tr><p></p></tr>
-                                    <tr>
-                                        <button className="btn btn-secondary btn-lg btn-block" onClick={this.handleCancelClick} ref={c => this.btnCancel = c}>Cancel</button>
-
-                                    </tr>
-
+                            <tr className="trbtn_">
+                                <td className="trbtn_"></td>
+                                <td className="trbtn_">
+                                    <button onClick={this.handleNewClick} ref={c => this.btnNew = c}>New</button>
                                 </td>
 
+                                <td className="trbtn_">
+                                    <button className="btn btn-danger btn-lg btn-block" onClick={this.handleDelClick} ref={c => this.btnDel = c}>Delete</button>
+                                </td>
+                                <td className="trbtn_">
+                                    <button className="btn btn-success btn-lg btn-block" onClick={this.handleSaveClick} ref={c => this.btnSave = c} >Save</button>
+                                </td>
+                                <td className="trbtn_">
+                                    <button className="btn btn-secondary btn-lg btn-block" onClick={this.handleCancelClick} ref={c => this.btnCancel = c}>Cancel</button>
+                                </td>
 
-                            </td>
-
+                            </tr>
+                            <tr className="trElm_">
+                                <td className="tdElements_" >
+                                    <tr>
+                                        <td className="td_">Type Id</td>
+                                        <td>
+                                            <input type="number" name="idField" ref={c => this.myDivid = c} style={{ width: 100, borderColor: 'gray', borderWidth: 1 }} disabled />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="td_">Abbreviation</td>
+                                        <td>
+                                            <input type="text" name="abbreviation" ref={c => this.myDivAbbr = c} style={{ width: 100, borderColor: 'gray', borderWidth: 1 }} disabled />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="td_">Type name</td>
+                                        <td>
+                                            <input type="text" name="typename" ref={c => this.myDivName = c} style={{ width: 200, borderColor: 'gray', borderWidth: 1 }} />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="td_">formula</td>
+                                        <td>
+                                            <textarea name="formula" ref={c => this.myDivformula = c} style={{ height: 150, width: 400, borderColor: 'gray', borderWidth: 1 }} />
+                                        </td>
+                                    </tr>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
