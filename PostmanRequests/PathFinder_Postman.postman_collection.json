@@ -1,0 +1,555 @@
+{
+	"info": {
+		"_postman_id": "fb9bd016-8009-46f0-9f0d-0377a5e6f137",
+		"name": "PathFinder_Postman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All building types",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://pathfinderserverrestapi.azurewebsites.net/buildingtypes",
+					"protocol": "https",
+					"host": [
+						"pathfinderserverrestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"buildingtypes"
+					]
+				},
+				"description": "Getting all data from buildingtypes"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All objects",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://pathfinderserverrestapi.azurewebsites.net/objects",
+					"protocol": "https",
+					"host": [
+						"pathfinderserverrestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"objects"
+					]
+				},
+				"description": "Getting all data from buildingtypes"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All materials",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://pathfinderserverrestapi.azurewebsites.net/materials",
+					"protocol": "https",
+					"host": [
+						"pathfinderserverrestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"materials"
+					]
+				},
+				"description": "Getting all data from buildingtypes"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete building types",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://pathfinderserverrestapi.azurewebsites.net/buildingtypes/6",
+					"protocol": "https",
+					"host": [
+						"pathfinderserverrestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"buildingtypes",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete objects",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://pathfinderserverrestapi.azurewebsites.net/objects/7",
+					"protocol": "https",
+					"host": [
+						"pathfinderserverrestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"objects",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete materials",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://pathfinderserverrestapi.azurewebsites.net/materials/4",
+					"protocol": "https",
+					"host": [
+						"pathfinderserverrestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"materials",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get by ID building types",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://pathfinderserverrestapi.azurewebsites.net/buildingtypes/bdtps/6",
+					"protocol": "https",
+					"host": [
+						"pathfinderserverrestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"buildingtypes",
+						"bdtps",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get by ID objects",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://pathfinderserverrestapi.azurewebsites.net/objects/objs/1",
+					"protocol": "https",
+					"host": [
+						"pathfinderserverrestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"objects",
+						"objs",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get by ID materials",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://pathfinderserverrestapi.azurewebsites.net/materials/mats/1",
+					"protocol": "https",
+					"host": [
+						"pathfinderserverrestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"materials",
+						"mats",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update building types",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "typename",
+							"value": "new type B",
+							"type": "text"
+						},
+						{
+							"key": "formula",
+							"value": "@T001+@T002+@T003",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://pathfinderserverrestapi.azurewebsites.net/buildingtypes/5",
+					"protocol": "https",
+					"host": [
+						"pathfinderserverrestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"buildingtypes",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Objects",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "objectname",
+							"value": "Roof",
+							"type": "text"
+						},
+						{
+							"key": "formula",
+							"value": "@T001+@T002",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://pathfinderserverrestapi.azurewebsites.net/objects/7",
+					"protocol": "https",
+					"host": [
+						"pathfinderserverrestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"objects",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update materials",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "materialname",
+							"value": "Iron 2",
+							"type": "text"
+						},
+						{
+							"key": "coefficient",
+							"value": "0.18",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://pathfinderserverrestapi.azurewebsites.net/materials/4",
+					"protocol": "https",
+					"host": [
+						"pathfinderserverrestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"materials",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post buildingtypes",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "typename",
+							"value": "new type GG",
+							"type": "text"
+						},
+						{
+							"key": "formula",
+							"value": "@T001+@T002+@T004",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://pathfinderserverrestapi.azurewebsites.net/buildingtypes",
+					"protocol": "https",
+					"host": [
+						"pathfinderserverrestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"buildingtypes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post objects",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "objectname",
+							"value": "new Objects12",
+							"type": "text"
+						},
+						{
+							"key": "formula",
+							"value": "@T001+@T002+@T004",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://pathfinderserverrestapi.azurewebsites.net/objects",
+					"protocol": "https",
+					"host": [
+						"pathfinderserverrestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"objects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post materials",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "materialname",
+							"value": "Iron",
+							"type": "text"
+						},
+						{
+							"key": "coefficient",
+							"value": "1.12",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://pathfinderserverrestapi.azurewebsites.net/materials",
+					"protocol": "https",
+					"host": [
+						"pathfinderserverrestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"materials"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post buildingstouser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userlistid",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "buildingtypeid",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "buildingage",
+							"value": "50",
+							"type": "text"
+						},
+						{
+							"key": "presentvalue",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "newvalue",
+							"value": "0",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://pathfinderserverrestapi.azurewebsites.net/buildingstouser",
+					"protocol": "https",
+					"host": [
+						"pathfinderserverrestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"buildingstouser"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

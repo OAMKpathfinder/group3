@@ -9,13 +9,13 @@ import ReactTable from 'react-table';
 
 
 import axios from 'axios';
-import './Building.css';
-const baseclsUrl = 'https://pathfinderserverrestapi.azurewebsites.net/buildingtypes';
+import './materilas.css';
+const baseclsUrl = 'https://pathfinderserverrestapi.azurewebsites.net/materials';
 const COLUMN_WIDTH = 140;
 
 const columns = [
     {
-        key: "buildingtypeid",
+        key: "materialsid",
         name: "ID",
         width: 150
     },
@@ -26,21 +26,21 @@ const columns = [
         width: 250
     },
     {
-        key: "typename",
-        name: "Type name",
+        key: "materialname",
+        name: "Material Name",
         width: 300
 
     },
     {
-        key: "formula",
-        name: "formula",
+        key: "coefficient",
+        name: "Coefficient",
         width: 150
     },
 
 ];
 
 
-class building extends Component {
+class materials extends Component {
     constructor() {
         super();
         this.getDataList = this.getDataList.bind(this);
@@ -99,7 +99,7 @@ class building extends Component {
                 this.myDivid.value = 0;
                 this.myDivAbbr.value = '';
                 this.myDivName.value = '';
-                this.myDivformula.value = "";
+                this.myDivcoefficient.value = 0;
                 break;
 
 
@@ -115,7 +115,7 @@ class building extends Component {
     }
     handleDelClick(){
         axios
-        .delete('https://pathfinderserverrestapi.azurewebsites.net/buildingtypes/'+ this.myDivid.value)
+        .delete('https://pathfinderserverrestapi.azurewebsites.net/materials/'+ this.myDivid.value)
         .then(res => {
             this.getDataList();
         });
@@ -128,14 +128,14 @@ class building extends Component {
     handleSaveClick() {
         const PostData = {
 
-            typename: this.myDivName.value,
-            formula: this.myDivformula.value
+            materialname: this.myDivName.value,
+            coefficient: this.myDivcoefficient.value
         }
 
         if (this.frmStatus == 1) {
 
             axios
-                .post('https://pathfinderserverrestapi.azurewebsites.net/buildingtypes/', PostData)
+                .post('https://pathfinderserverrestapi.azurewebsites.net/materials/', PostData)
                 .then(res => {
                     this.getDataList();
                 });
@@ -145,7 +145,7 @@ class building extends Component {
         if (this.frmStatus == 0) {
 
             axios
-                .put('https://pathfinderserverrestapi.azurewebsites.net/buildingtypes/' + this.myDivid.value, PostData)
+                .put('https://pathfinderserverrestapi.azurewebsites.net/materials/' + this.myDivid.value, PostData)
                 .then(res => {
                     this.getDataList();
                 });
@@ -198,10 +198,10 @@ class building extends Component {
             if ((this.state.lstDataList.length > 0) && (this.frmStatus == 0)) {
                 this.selected_row = iRowIdx;
                 let cust = this.state.lstDataList[iRowIdx];
-                this.myDivid.value = cust["buildingtypeid"];
+                this.myDivid.value = cust["materialsid"];
                 this.myDivAbbr.value = cust["abbreviation"];
-                this.myDivName.value = cust["typename"];
-                this.myDivformula.value = cust["formula"];
+                this.myDivName.value = cust["materialname"];
+                this.myDivcoefficient.value = cust["coefficient"];
 
 
             }
@@ -220,7 +220,7 @@ class building extends Component {
                         <tbody>
                             <td className="tdElements_" >
                                 <tr>
-                                    <td className="td_">Type Id</td>
+                                    <td className="td_">Materid Id</td>
                                     <td>
                                         <input type="number" name="idField" ref={c => this.myDivid = c} style={{ width: 100, borderColor: 'gray', borderWidth: 1 }} disabled />
                                     </td>
@@ -232,15 +232,15 @@ class building extends Component {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className="td_">Type name</td>
+                                    <td className="td_">Material name</td>
                                     <td>
-                                        <input type="text" name="typename" ref={c => this.myDivName = c} style={{ width: 200, borderColor: 'gray', borderWidth: 1 }}  />
+                                        <input type="text" name="materialname" ref={c => this.myDivName = c} style={{ width: 200, borderColor: 'gray', borderWidth: 1 }}  />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className="td_">formula</td>
+                                    <td className="td_">Coefficient</td>
                                     <td>
-                                    <textarea name="formula" ref={c => this.myDivformula = c} style={{ height: 150, width: 400, borderColor: 'gray', borderWidth: 1 }}  />
+                                        <input type="number" placeholder="0.00" step="0.01" name="coefficient" ref={c => this.myDivcoefficient = c} style={{ width: 200, borderColor: 'gray', borderWidth: 1 }}  />
                                     </td>
                                 </tr>
                             </td>
@@ -281,8 +281,65 @@ class building extends Component {
 
 
             </div>
+            // <div>
+
+            //     <div className="Top_">
+            //         <table >
+            //             <col width="100" />
+            //             <col width="280" />
+            //             <col width="100" />
+            //             <col width="130" />
+            //             <col width="250" />
+
+            //             <thead></thead>
+            //             <tbody>
+            //                 <tr height="30">
+            //                     <td className="td_" >Material Id</td>
+
+            //                     <td>
+            //                         <input type="number" name="materialsid" ref={c => this.myDivmaterialsid = c} style={{ width: 100, borderColor: 'gray', borderWidth: 1 }} disabled />
+            //                     </td>
+            //                     <td></td>
+            //                     <td>
+            //                     <button onClick={()=> this.handleClick(1) }>Hello Application</button>
+            //                     </td>
+            //                     <td><button  id={2}  >Editadf</button></td>
+            //                 </tr>
+            //                 <tr height="30">
+            //                     <td className="td_">Abbreviation</td>
+            //                     <td>
+            //                         <input type="Text" name="abbreviation" ref={c => this.myDivabbreviation = c} style={{ width: 100, borderColor: 'gray', borderWidth: 1 }} disabled />
+            //                     </td>
+            //                     <td></td>
+            //                 </tr>
+            //                 <tr height="30">
+            //                     <td className="td_" >Material name</td>
+            //                     <td >
+            //                         <input type="Text" name="materialname" ref={c => this.myDivmaterialname = c} style={{ width: 100, borderColor: 'gray', borderWidth: 1 }} />
+            //                     </td>
+            //                     <td></td>
+            //                 </tr>
+            //                 <tr height="30">
+            //                     <td className="td_" >Coefficient</td>
+            //                     <td>
+            //                         <input type="number" name="coefficient" ref={c => this.myDivcoefficient = c} style={{ width: 100, borderColor: 'gray', borderWidth: 1 }} />
+            //                     </td>
+            //                     <td></td>
+            //                 </tr>
+
+
+            //             </tbody>
+            //         </table>
+            //     </div>
+
+
+
+            //     <div>
+
+            //     </div>
+            // </div>
         );
     }
 }
 
-export default building;
+export default materials;

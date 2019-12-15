@@ -1,165 +1,238 @@
-import React from 'react'
-import { forwardRef } from 'react';
-import { makeStyles } from '@material-ui/core/styles'
-import Card from '@material-ui/core/Card'
-import Typography from '@material-ui/core/Typography'
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent'
-import Divider from '@material-ui/core/Divider';
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
-import EditIcon from '@material-ui/icons/Edit';
-import Button from '@material-ui/core/Button';
-import MaterialTable from 'material-table'
-import DeleteIcon from '@material-ui/icons/Delete';
-import Search from '@material-ui/icons/Search';
-import Check from '@material-ui/icons/Check';
-import AddBox from '@material-ui/icons/AddBox';
-import Clear from '@material-ui/icons/Clear';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import ChevronRight from '@material-ui/icons/ChevronRight';
-import FirstPage from '@material-ui/icons/FirstPage';
-import LastPage from '@material-ui/icons/LastPage';
-import DeleteOutline from '@material-ui/icons/DeleteOutline';
+
+import useAxios from '@use-hooks/axios';
+
+import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
+import ReactDataGrid from "react-data-grid";
 import axios from 'axios';
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-balham.css';
+import createRowData from "./getMaterials";
 
-const tableIcons = {
-  Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
-  Edit: forwardRef((props, ref) => <EditIcon {...props} ref={ref} />),
-  Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
-  ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-  Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
-  Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
-  Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-  FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
-  LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
-  NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-  PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
+var rows = [];
 
+const defaultColumnProperties = {
+  width: 160
 };
 
-const useStyles = makeStyles(theme => ({
-  card: {
-    marginTop: '20px',
-    width: '100%',
-    margin: '5px'
-  },
-  text: {
-    marginLeft: '15px',
-    width: '30%',
-  },
-  button: {
-    width: '20%',
-    margin: '20px'
-  },
-  demo: {
-    backgroundColor: theme.palette.background.paper,
-  },
-  title: {
-    margin: theme.spacing(4, 0, 2),
-  },
-}));
+const columns = [
+  {
+    field: "materialsid",
+    headerName: "ID",
 
+  },
+  {
+    field: "abbreviation",
+    headerName: "abbreviation",
 
+  },
+  {
+    field: "materialname",
+    headerName: "material name",
 
+  },
+  {
+    field: "coefficient",
+    headerName: "coefficient",
 
+  },
+  // {
+  //   field: "",
+  //   headerName: "Edit",
+
+  // },
+  // {
+  //   field: "",
+  //   headerName: "Delete",
+
+  // },
+].map(c => ({ ...c, ...defaultColumnProperties }));
+let myRow = [];
+const firstNameActions = [
+  {
+    icon: <span className="glyphicon glyphicon-remove" />,
+    callback: () => {
+      alert("Deleting");
+    }
+  },
+  {
+    icon: "glyphicon glyphicon-link",
+    actions: [
+      {
+        text: "Option 1",
+        callback: () => {
+          alert("Option 1 clicked");
+        }
+      },
+      {
+        text: "Option 2",
+        callback: () => {
+          alert("Option 2 clicked");
+        }
+      }
+    ]
+  }
+];
+function getCellActions(column, row) {
+  const cellActions = {
+    firstName: firstNameActions
+  };
+  return row.id % 2 === 0 ? cellActions[column.key] : null;
+}
+
+const ROW_COUNT = 3;
 
 
 function Materials() {
-  const classes = useStyles();
-  const [state, setState] = React.useState({
-    columns: [
-      { title: 'Id', field: 'materialsid' },
-      { title: 'abbreviation', field: 'abbreviation' },
-      { title: 'Material', field: 'materialname' },
-      { title: 'U-Value', field: 'coefficient', type: 'numeric' }
-    ],
-    data:[]
-  });
-  
+  // const [data, setData] = useState({ rows: [] });
+  // const [query, setQuery] = useState('react');
 
 
 
-  axios.get(`https://pathfinderserverrestapi.azurewebsites.net/materials`).then(res => {
-    const _lstMaterilas = res.data;
+
+  // alert(JSON.stringify(rows));
+  // useEffect(() => {
+  //   let ignore = false;
+
+  //   async function fetchData() {
+  //     alert("2222");
+  //     const result = await axios('http://localhost:1337/materials');
+  //     //const result = await axios('https://hn.algolia.com/api/v1/search?query=' + query);
+  //     if (!ignore) {
+  //       //myRow=result.data.rows.map(x=> x);
+  //       setData(result.data);
+  //       //rows=result.data;
+  //      alert(JSON.stringify(this.setData));
+
+  //       //alert(myRow[0]["materialname"]);
+  //     }
+
+  //   }
+
+  //   fetchData();
+
+  //   return () => { ignore = true; }
+  // }, [query]);
 
 
-    state.data = _lstMaterilas;
-    //alert(state.data[0]);
+  const [gender, setGender] = useState('');
+  const { response, loading, error, reFetch } = useAxios(
+    {
+      //url: "https://randomuser.me/api/${gender === 'unknown' ? 'unknown' : ''}",
+      url: `http://localhost:1337/materials`,
+      method: 'GET',
+      options: {
+        //params: { gender },
+      },
+      trigger: gender,
+      // or
+      // trigger: { gender }
+      //forceDispatchEffect: () => !!gender, // AUTO RUN only if gender is set
+    });
 
-  });
+  const { data } = response || {};
+alert(JSON.stringify(data));
+  const options = [
+    { gender: 'female', title: 'Female' },
+    { gender: 'male', title: 'Male' },
+    { gender: 'unknown', title: 'Unknown' },
+  ];
 
+  if (loading) return 'loading...';
+  return 
+  (
+    <>
+    <div>
+      
+    </div>
+    </>
+    //   <div>
+    //   <ReactDataGrid
+    //     columns={columns}
+    //     rowGetter={data}
+    //     rowsCount={5}
+    //     minHeight={500}
+    //     getCellActions={getCellActions}
+    //   />
+    // </div> 
 
-  return (
-    <Card className={classes.card}>
-      <CardHeader
-        title="Materials"
-      />
-      <Divider />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          Building materials with the corresponding heat transmittance values are available on this page.
-          </Typography>
-      </CardContent>
-      <Paper className={classes.root}>
-        <form noValidate autoComplete="off">
-          <TextField className={classes.text} id="filled-basic" label="Material name" variant="filled" />
-          <TextField className={classes.text} id="filled-basic" label="Heat transmittance value" variant="filled" />
-          <Button className={classes.button} variant="contained" color="primary">
-            Add
-        </Button>
-        </form>
-        <Divider />
-        <div>
-          <div className={classes.demo}>
-            <MaterialTable
-              icons={tableIcons}
-              title="Materials"
-              columns={state.columns}
-              data={state.data}
-              editable={{
-                onRowAdd: newData =>
-                  new Promise(resolve => {
-                    setTimeout(() => {
-                      resolve();
-                      setState(prevState => {
-                        const data = [...prevState.data];
-                        data.push(newData);
-                        return { ...prevState, data };
-                      });
-                    }, 600);
-                  }),
-                onRowUpdate: (newData, oldData) =>
-                  new Promise(resolve => {
-                    setTimeout(() => {
-                      resolve();
-                      if (oldData) {
-                        setState(prevState => {
-                          const data = [...prevState.data];
-                          data[data.indexOf(oldData)] = newData;
-                          return { ...prevState, data };
-                        });
-                      }
-                    }, 600);
-                  }),
-                onRowDelete: oldData =>
-                  new Promise(resolve => {
-                    setTimeout(() => {
-                      resolve();
-                      setState(prevState => {
-                        const data = [...prevState.data];
-                        data.splice(data.indexOf(oldData), 1);
-                        return { ...prevState, data };
-                      });
-                    }, 600);
-                  }),
-              }}
-            />
-          </div>
-        </div>
-      </Paper>
-    </Card>
-  );
+  //   <div>
+  //     <h2>
+  //       DEMO of
+  //       <span style={{ color: '#F44336' }}>@use-hooks/axios</span>
+  //     </h2>
+  //     {options.map(item => (
+  //       <div key={item.gender}>
+  //         <input
+  //           type="radio"
+  //           id={item.gender}
+  //           value={item.gender}
+  //           checked={gender === item.gender}
+  //           onChange={e => setGender(e.target.value)}
+  //         />
+  //         {item.title}
+  //       </div>
+  //     ))}
+  //     <button type="button" onClick={reFetch}>
+  //       Refresh
+  //     </button>
+  //     <div>
+  //       {error ? (
+  //         error.message || 'error'
+  //       ) : (
+  //           <textarea
+  //             cols="100"
+  //             rows="30"
+  //             defaultValue={JSON.stringify(data || {}, '', 2)}
+  //           />
+  //         )}
+  //     </div>
+  //   </div>
+   );
 }
+
+// return (
+//   <>
+
+    {/* <div>
+      <ReactDataGrid
+        columns={columns}
+        rowGetter={myRow}
+        rowsCount={5}
+        minHeight={500}
+        getCellActions={getCellActions}
+      />
+    </div> */}
+
+//     {/* <div>
+//       <ReactDataGrid
+//         columns={columns}
+//         rowGetter={myRow}
+//         rowsCount={2}
+//         minHeight={500}
+
+//       />
+//     </div> */}
+
+//     <div
+//       className="ag-theme-balham"
+//       style={{
+
+//         height: '500px', width: '1500px'
+//       }}
+//     >
+//       <AgGridReact
+//         columnDefs={columns}
+//         rowData={data.rows}>
+//       </AgGridReact>
+//     </div>
+
+
+
+
+//   </>
+// );
+//}
 
 export default Materials;
