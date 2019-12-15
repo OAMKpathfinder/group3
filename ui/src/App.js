@@ -11,7 +11,8 @@ import Calculate from './Routes/Calculation/Calculation'
 import Objects from './Routes/Objects/Objects'
 import Building from './Routes/Building/Building'
 import Materials from './Routes/Materials/Materials'
-import Results from './Routes/Calculation_Zhanna/Result.js'
+import Results from './Routes/Calculation_Zhanna/Calculation.js'
+import CalcResults from './Routes/CalcResult/Results.js'
 
 
 
@@ -26,6 +27,7 @@ function App({ children }) {
           <Route path="/materials" exact component={Materials} />
           <Route path="/calculate" exact component={Calculate} />
           <Route path="/result" exact component={Results} />
+          <Route path="/result/1" exact component={CalcResults} />
         </Switch>
         <Footer />
       </div>
