@@ -178,7 +178,7 @@ class objects extends Component {
             if ((this.state.lstDataList.length > 0) && (this.frmStatus === 0)) {
                 this.selected_row = iRowIdx;
                 let cust = this.state.lstDataList[iRowIdx];
-                this.myDivid.value = cust["buildingtypeid"];
+                this.myDivid.value = cust["objectsid"];
                 this.myDivAbbr.value = cust["abbreviation"];
                 this.myDivName.value = cust["objectname"];
                 this.myDivformula.value = cust["formula"];

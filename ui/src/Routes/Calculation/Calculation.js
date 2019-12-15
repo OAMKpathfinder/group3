@@ -51,6 +51,12 @@ const columns = [
     },
 
 ];
+const urls = [
+    'https://pathfinderserverrestapi.azurewebsites.net/objects',
+    'https://pathfinderserverrestapi.azurewebsites.net/materials',
+    'https://pathfinderserverrestapi.azurewebsites.net//buildingstouserdetail/gtdet/19'
+];
+
 
 
 class calculate extends Component {
@@ -58,8 +64,8 @@ class calculate extends Component {
         super();
 
         this.getDataList = this.getDataList.bind(this);
-        this.getObjectsList = this.getObjectsList.bind(this);
-        this.getMaterialList = this.getMaterialList.bind(this);
+        // this.getObjectsList = this.getObjectsList.bind(this);
+        // this.getMaterialList = this.getMaterialList.bind(this);
 
         this.frmStatus = 0;
 
@@ -70,6 +76,8 @@ class calculate extends Component {
         this.handleDelClick = this.handleDelClick.bind(this);
         this.handleSaveClick = this.handleSaveClick.bind(this);
         this.handleCancelClick = this.handleCancelClick.bind(this);
+        this.handleCalcClick = this.handleCalcClick.bind(this);
+
 
         this.showButt = this.showButt.bind(this);
 
@@ -81,13 +89,14 @@ class calculate extends Component {
         };
         this.lstObjectDataList = [];
         this.lstMaterialsDataList = [];
+        this.getDataList();
 
     }
-    componentDidMount() {
-        this.getDataList();
-        this.getObjectsList();
-        this.getMaterialList();
-    }
+
+
+
+
+
 
     CreateGrid() {
         return (
@@ -129,6 +138,22 @@ class calculate extends Component {
 
 
     }
+    handleCalcClick() {
+        if (this.frmStatus === 0) {
+
+            axios.get('https://pathfinderserverrestapi.azurewebsites.net/buildingstouserdetail/bdusrclc/:buildingstouserid').then(res => {
+                const _lstDataList = res.data;
+                if (_lstDataList.length > 0) {
+
+                    this.setState({ lstDataList: _lstDataList });
+                    this.rowselect(0);
+                    this.CreateGrid();
+                }
+
+
+            });
+        }
+    }
     handleNewClick() {
         this.frmStatus = 1;
         this.showButt();
@@ -152,7 +177,7 @@ class calculate extends Component {
             materialsid: this.myDivMat.value,
             numberofobjects: this.myDivNumber.value,
             objectarea: this.myDivArea.value,
-            //newmaterialsid: this.myDivNewMat.value
+            newmaterialsid: this.myDivNewMat.value
 
 
         }
@@ -186,17 +211,60 @@ class calculate extends Component {
 
 
     getDataList() {
-        axios.get(baseclsUrl).then(res => {
-            const _lstDataList = res.data;
-            if (_lstDataList.length > 0) {
+        // axios.get(baseclsUrl).then(res => {
+        //     const _lstDataList = res.data;
+        //     if (_lstDataList.length > 0) {
 
-                this.setState({ lstDataList: _lstDataList });
-                this.rowselect(0);
-                this.CreateGrid();
-            }
+        //         this.setState({ lstDataList: _lstDataList });
+        //         this.rowselect(0);
+        //         this.CreateGrid();
+        //     }
 
 
-        });
+        // });
+
+        // Promise.all(urls.map(url =>
+
+        //     fetch(url)
+        //         .then(checkStatus)
+        //         .then(parseJSON)
+        //         .catch(error => console.log('There was a problem!', error))
+        // ))
+        //     .then(data => {
+        //         JSON.stringify(data[0].message);
+        //         this.lstObjectDataList = data[0].message;
+        //         this.lstMaterialsDataList = data[1].message;
+        //         this.setState({ lstDataList: data[2].message });
+
+        //     });
+
+
+        Promise.all([
+            fetch('https://pathfinderserverrestapi.azurewebsites.net//buildingstouserdetail/gtdet/19'),
+            fetch('https://pathfinderserverrestapi.azurewebsites.net/objects'),
+            fetch('https://pathfinderserverrestapi.azurewebsites.net/materials')
+          ]).then(async([aa, bb, cc]) => {
+            const a = await aa.json();
+            this.lstObjectDataList = await bb.json();
+            this.lstMaterialsDataList = await cc.json();
+            this.setState({ lstDataList: a });
+            //this.lstObjectDataList =b;
+            //this.lstMaterialsDataList=c;
+            //return [a  ]
+          })
+          .then((responseText) => {
+           // alert( JSON.stringify(this.lstObjectDataList) );
+            console.log(responseText);
+            this.rowselect(0);
+        
+          }).catch((err) => {
+            console.log(err);
+          });
+
+         
+          
+
+
     }
 
     getObjectsList() {
@@ -232,7 +300,8 @@ class calculate extends Component {
 
                 this.selected_row = iRowIdx;
                 let cust = this.state.lstDataList[iRowIdx];
-
+alert(cust["materialsid"]);
+alert(cust["newmaterialsid"]);
                 this.myDivid.value = cust["buildingstouserdetailid"];
                 this.myDivObj.value = cust["objectsid"];
                 this.myDivMat.value = cust["materialsid"];
@@ -270,6 +339,9 @@ class calculate extends Component {
                                 <td className="trbtn_">
                                     <button className="btn btn-secondary btn-lg btn-block" onClick={this.handleCancelClick} ref={c => this.btnCancel = c}>Cancel</button>
                                 </td>
+                                <td className="trbtn_">
+                                    <button className="btn btn-secondary btn-lg btn-block" onClick={this.handleCalcClick} >calculate</button>
+                                </td>
 
                             </tr>
                             <tr className="trElm_">
@@ -292,7 +364,7 @@ class calculate extends Component {
                                     <tr>
                                         <td className="td_">Current material</td>
                                         <td>
-                                            <select ref={c => this.myDivMat = c}>
+                                            <select ref={c => this.myDivMat = c} width={100}>
                                                 {this.lstMaterialsDataList.map((team) => <option key={team.materialname} value={team.materialsid}>{team.materialname}</option>)}
                                             </select>
 
