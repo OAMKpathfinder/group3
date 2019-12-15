@@ -10,10 +10,9 @@ import {
 } from "react-router-dom";
 import Home from './Routes/Home/Home'
 import Calculate from './Routes/Calculation/Calculation'
-//import Materials from './Routes/Materials/Materials'
 import Objects from './Routes/Objects/Objects'
 import Building from './Routes/Building/Building'
-import Material from './Routes/Material/materilas'
+import Material from './Routes/Materials/Materials'
 
 
 
