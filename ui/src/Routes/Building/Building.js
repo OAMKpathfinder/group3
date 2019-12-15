@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
 import ReactDOM from "react-dom";
 import ReactDataGrid from "react-data-grid";

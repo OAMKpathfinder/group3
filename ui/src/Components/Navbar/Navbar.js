@@ -5,9 +5,9 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
-import Button from '@material-ui/core/Button'
 import {
   Link
 } from "react-router-dom"
@@ -53,13 +53,14 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   menu: {
-    backgroundColor: '#33334d',
+    backgroundColor: '#29293d',
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
+    margin: '20px'
   },
   card: {
     maxWidth: 545,
@@ -69,7 +70,13 @@ const useStyles = makeStyles(theme => ({
   media: {
     height: 140,
   },
-   
+  link: {
+    textDecoration: 'none',
+    textColor: '#29293d'
+  },
+  brand:{
+    backgroundColor: '#29293d'
+  }
 })
 );
 
@@ -86,39 +93,38 @@ export default function ScrollableTabsButtonAuto() {
 
   return (
      <div className={classes.root}>
-       <AppBar position="static">
-          <Toolbar className={classes.menu}>
-            <Typography variant="h6" className={classes.title}>
-               <h1> PATHFINDER</h1>
-            </Typography>
-            <Button color="inherit">FI</Button>
-            <Button color="inherit">ENG</Button>
-            <Button color="inherit">SV</Button>
-          </Toolbar>
+       <AppBar position="static" className={classes.brand}>
+        <Toolbar>
+          <Typography variant="h6" className={classes.title}>
+            Energy Pathfinder
+          </Typography>
+          <Button color="inherit">Login</Button>
+        </Toolbar>
         </AppBar>
         <AppBar position="static" color="default">
           <Tabs
+            className={classes.link}
             value={value}
             onChange={handleChange}
-            indicatorColor="primary"
-            textColor="primary"
+            indicatorColor="#29293d"
+            textColor="#29293d"
             variant="scrollable"
             scrollButtons="auto"
             aria-label="scrollable auto tabs example"
             >
-              <Link to="/">
+              <Link className={classes.link} to="/">
                 <Tab label="Home page" {...a11yProps(0)} />
               </Link>
-              <Link to="/building">
+              <Link className={classes.link} to="/building">
                 <Tab label="Building type" {...a11yProps(0)} to="/building"/>
               </Link>
-              <Link to="/materials">
+              <Link className={classes.link} to="/materials">
                 <Tab label="Materials" {...a11yProps(0)} to="/materials"/>
               </Link>
-              <Link to="/objects">
+              <Link className={classes.link} to="/objects">
                 <Tab label="Objects" {...a11yProps(0)} to="/objects"/>
               </Link>
-              <Link to="/calculate">
+              <Link className={classes.link} to="/calculate">
                 <Tab label="Calculate" {...a11yProps(0)} to="/calculate"/>
               </Link>
           </Tabs>
