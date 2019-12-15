@@ -108,17 +108,8 @@ function Result() {
       label: '10 rooms',
     },
   ];
-  
-  
-  function valueLabelFormat(value) {
-    return marks.findIndex(mark => mark.value === value) + 1;
-  }
 
   const [age, setAge] = React.useState('');
-
-  const handleChange = event => {
-    setAge(event.target.value);
-  };
 
   return (
     <Card className={classes.card}>

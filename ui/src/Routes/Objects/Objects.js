@@ -1,17 +1,9 @@
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
-import ReactDOM from "react-dom";
 import ReactDataGrid from "react-data-grid";
-
-import Button from 'react-bootstrap/lib/Button';
-
-import ReactTable from 'react-table';
-
-
 import axios from 'axios';
 import './Objects.css';
 const baseclsUrl = 'https://pathfinderserverrestapi.azurewebsites.net/objects';
-const COLUMN_WIDTH = 140;
 
 const columns = [
     {
@@ -132,7 +124,7 @@ class objects extends Component {
             formula: this.myDivformula.value
         }
 
-        if (this.frmStatus == 1) {
+        if (this.frmStatus === 1) {
 
             axios
                 .post('https://pathfinderserverrestapi.azurewebsites.net/objects/', PostData)
@@ -142,7 +134,7 @@ class objects extends Component {
 
 
         }
-        if (this.frmStatus == 0) {
+        if (this.frmStatus === 0) {
 
             axios
                 .put('https://pathfinderserverrestapi.azurewebsites.net/objects/' + this.myDivid.value, PostData)
@@ -191,11 +183,11 @@ class objects extends Component {
     }
 
     rowselect(iRowIdx) {
-        if (iRowIdx == -99) {
+        if (iRowIdx === -99) {
 
         } else {
 
-            if ((this.state.lstDataList.length > 0) && (this.frmStatus == 0)) {
+            if ((this.state.lstDataList.length > 0) && (this.frmStatus === 0)) {
                 this.selected_row = iRowIdx;
                 let cust = this.state.lstDataList[iRowIdx];
                 this.myDivid.value = cust["buildingtypeid"];
