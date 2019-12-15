@@ -1,12 +1,9 @@
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
 import ReactDataGrid from "react-data-grid";
-
-
 import axios from 'axios';
 import './Materials.css';
 const baseclsUrl = 'https://pathfinderserverrestapi.azurewebsites.net/materials';
-
 
 const columns = [
     {
@@ -192,7 +189,6 @@ class materials extends Component {
     }
 
     render() {
-
         return (
 
             <div className="mainDiv_">

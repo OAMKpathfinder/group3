@@ -1,13 +1,6 @@
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
-
 import ReactDataGrid from "react-data-grid";
-
-
-
-
-
-
 import axios from 'axios';
 import './Calculation.css';
 const baseclsUrl = 'https://pathfinderserverrestapi.azurewebsites.net//buildingstouserdetail/gtdet/19';
