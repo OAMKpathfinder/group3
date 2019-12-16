@@ -13,7 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
-import MaterSlider from './Buildings.js'
+import MaterSlider from './Buildings.js';
+import HomeIcon from '@material-ui/icons/Home';
 import BatteryCharging50Icon from '@material-ui/icons/BatteryCharging50';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -236,7 +237,7 @@ class building extends Component {
                   <ListItem className="list-item">
                     <ListItemAvatar className="energy">
                       <Avatar>
-                        <BubbleChartIcon />
+                        <HomeIcon />
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText>
@@ -254,7 +255,7 @@ class building extends Component {
                     </ListItemAvatar>
                     <ListItemText>
                       <div className="input-field">
-                        <input name="formula" ref={c => (this.myDivformula = c)} />
+                        <input name="formula" ref={c => (this.myDivformula = c)} style={{ height: 100, width: 300}}/>
                         <label>Formula</label>
                       </div>
                     </ListItemText>
@@ -284,7 +285,7 @@ class building extends Component {
                       <Button
                         variant="contained"
                         className="btn2"
-                        color="secondary"
+                        color="primary"
                         onClick={this.handleSaveClick}
                         ref={c => (this.btnSave = c)}
                       >
@@ -292,7 +293,7 @@ class building extends Component {
                       </Button>
                       <Button
                         variant="contained"
-                        color="secondary"
+                        color="primary"
                         className="btn2"
                         onClick={this.handleCancelClick}
                         ref={c => (this.btnCancel = c)}

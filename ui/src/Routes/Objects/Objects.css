@@ -55,6 +55,20 @@
     margin-top: 20px;
   }
  
-  .btn {
-    margin: 10px !important;
+  .btn3 {
+    margin: 5px !important;
+    width: 105px;
   }
+ 
+  .paper3{
+   background-color:  #e6e6e6 !important;
+   margin: 20px;
+   width: 100%;
+   height: 600px;
+ }
+ 
+ .slider3{
+   margin: 20px;
+   margin-left: 150px;
+   width:100%;
+ }
