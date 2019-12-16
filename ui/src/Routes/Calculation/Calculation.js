@@ -492,3 +492,4 @@ class calculate extends Component {
 }
 
 export default calculate;
+

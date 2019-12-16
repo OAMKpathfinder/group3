@@ -10,7 +10,13 @@ const data = [
   },
   {
     name: 'Doors', uv: 15.69, pv: 1398, fill: '#8dd1e1',
-  }
+  },
+  {
+    name: 'Roof', uv: 8.22, pv: 9800, fill: '#82ca9d',
+  },
+  {
+    name: 'Outer wall', uv: 8.63, pv: 3908, fill: '#a4de6c',
+  },
 ];
 
 const style = {
