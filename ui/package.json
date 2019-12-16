@@ -26,6 +26,7 @@
     "react-table": "^7.0.0-rc.10",
     "react-table-container": "^2.0.3",
     "recharts": "^2.0.0-beta.1",
+    "typeface-roboto": "0.0.75",
     "typescript": "^3.7.2"
   },
   "scripts": {
