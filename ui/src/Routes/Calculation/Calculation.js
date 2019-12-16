@@ -77,13 +77,15 @@ class calculate extends Component {
     this.showButt = this.showButt.bind(this);
 
     this.CreateGrid = this.CreateGrid.bind(this);
-
+    this.butChange = this.butChange.bind(this);
     this.selected_row = 0;
     this.state = {
       lstDataList: [],
     };
     this.lstObjectDataList = [];
     this.lstMaterialsDataList = [];
+    this.lstBuildingType = [];
+    this.lstBldToUser = [];
     this.getDataList();
   }
 
@@ -126,10 +128,9 @@ class calculate extends Component {
   handleCalcClick() {
     if (this.frmStatus === 0) {
       Promise.all([
-        fetch(
-          'https://pathfinderserverrestapi.azurewebsites.net/buildingstouserdetail/bdusrclc/19',
-        ),
-        fetch('https://pathfinderserverrestapi.azurewebsites.net//buildingstouserdetail/gtdet/19'),
+        fetch('https://pathfinderserverrestapi.azurewebsites.net/buildingstouserdetail/bdusrclc/19'),
+        fetch('https://pathfinderserverrestapi.azurewebsites.net//buildingstouserdetail/gtdet/19')
+
       ])
         .then(async ([aa, bb]) => {
           const a = await aa.json();
@@ -170,7 +171,7 @@ class calculate extends Component {
     axios
       .delete(
         'https://pathfinderserverrestapi.azurewebsites.net/buildingstouserdetail/' +
-          this.myDivid.value,
+        this.myDivid.value,
       )
       .then(res => {
         this.getDataList();
@@ -201,7 +202,7 @@ class calculate extends Component {
       axios
         .put(
           'https://pathfinderserverrestapi.azurewebsites.net/buildingstouserdetail/' +
-            this.myDivid.value,
+          this.myDivid.value,
           PostData,
         )
         .then(res => {
@@ -212,7 +213,20 @@ class calculate extends Component {
     this.frmStatus = 0;
     this.showButt();
   }
-
+  butChange() {
+    const PostData = {
+      buildingtypeid: this.myDivBudType.value,
+      buildingage: 10
+    };
+    axios
+        .put(
+          'https://pathfinderserverrestapi.azurewebsites.net/buildingstouser/19' ,
+          PostData,
+        )
+        .then(res => {
+          //this.getDataList();
+        });
+  }
   getDataList() {
     // axios.get(baseclsUrl).then(res => {
     //     const _lstDataList = res.data;
@@ -244,11 +258,15 @@ class calculate extends Component {
       fetch('https://pathfinderserverrestapi.azurewebsites.net//buildingstouserdetail/gtdet/19'),
       fetch('https://pathfinderserverrestapi.azurewebsites.net/objects'),
       fetch('https://pathfinderserverrestapi.azurewebsites.net/materials'),
+      fetch('https://pathfinderserverrestapi.azurewebsites.net/buildingstouser/bdusr/19'),
+      fetch('https://pathfinderserverrestapi.azurewebsites.net/buildingtypes')
     ])
-      .then(async ([aa, bb, cc]) => {
+      .then(async ([aa, bb, cc, dd, ee]) => {
         const a = await aa.json();
         this.lstObjectDataList = await bb.json();
         this.lstMaterialsDataList = await cc.json();
+        this.lstBldToUser = await dd.json();
+        this.lstBuildingType = await ee.json();
         this.setState({ lstDataList: a });
         //this.lstObjectDataList =b;
         //this.lstMaterialsDataList=c;
@@ -293,6 +311,11 @@ class calculate extends Component {
         this.myDivNewMat.value = cust['newmaterialsid'];
         this.myDivArea.value = cust['objectarea'];
         this.myDivNumber.value = cust['numberofobjects'];
+        //alert( JSON.stringify(this.lstBldToUser) );
+        let butus = this.lstBldToUser[0];
+        this.myDivBudType.value = butus['buildingtypeid'];
+        this.myDiNewVal.value = butus['newvalue'];
+        this.myDivPrVal.value = butus['presentvalue'];
       }
     }
   }
@@ -349,6 +372,38 @@ class calculate extends Component {
               </tr>
               <tr className="trElm_">
                 <td className="tdElements_">
+                  <tr>
+                    <td className="td_">Building Type</td>
+                    <td>
+                      <select ref={c => (this.myDivBudType = c)} width={100} onChange={this.butChange}>
+                        {this.lstBuildingType.map(team => (
+                          <option key={team.typename} value={team.buildingtypeid}>
+                            {team.typename}
+                          </option>
+                        ))}
+                      </select>
+                    </td>
+                  </tr>
+                  <td className="td_">Present Value</td>
+                    <td>
+                      <input
+                        type="number"
+                        name="PresentVal"
+                        ref={c => (this.myDivPrVal = c)}
+                        style={{ width: 100, borderColor: 'gray', borderWidth: 1 }}
+                        disabled
+                      />
+                    </td>
+                    <td className="td_">New Value</td>
+                    <td>
+                      <input
+                        type="number"
+                        name="PresentVal"
+                        ref={c => (this.myDiNewVal = c)}
+                        style={{ width: 100, borderColor: 'gray', borderWidth: 1 }}
+                        disabled
+                      />
+                    </td>
                   <tr>
                     <td className="td_">Id</td>
                     <td>
