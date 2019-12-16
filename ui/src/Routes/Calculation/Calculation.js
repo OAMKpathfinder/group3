@@ -139,19 +139,45 @@ class calculate extends Component {
 
     }
     handleCalcClick() {
+        
         if (this.frmStatus === 0) {
 
-            axios.get('https://pathfinderserverrestapi.azurewebsites.net/buildingstouserdetail/bdusrclc/:buildingstouserid').then(res => {
-                const _lstDataList = res.data;
-                if (_lstDataList.length > 0) {
 
-                    this.setState({ lstDataList: _lstDataList });
-                    this.rowselect(0);
-                    this.CreateGrid();
-                }
+            Promise.all([
+                fetch('https://pathfinderserverrestapi.azurewebsites.net/buildingstouserdetail/bdusrclc/19'),
+                fetch('https://pathfinderserverrestapi.azurewebsites.net//buildingstouserdetail/gtdet/19')
+                
+              ]).then(async([aa, bb]) => {
+                const a = await aa.json();
+                const b = await bb.json();
+                
+                this.setState({ lstDataList: b });
+                //this.lstObjectDataList =b;
+                //this.lstMaterialsDataList=c;
+                //return [a  ]
+              })
+              .then((responseText) => {
+              //  alert( JSON.stringify(this.lstObjectDataList) );
+                console.log(responseText);
+                this.CreateGrid();
+                this.rowselect(0);
+            
+              }).catch((err) => {
+                console.log(err);
+              });
 
 
-            });
+            // axios.get('https://pathfinderserverrestapi.azurewebsites.net/buildingstouserdetail/bdusrclc/:buildingstouserid').then(res => {
+            //     const _lstDataList = res.data;
+            //     if (_lstDataList.length > 0) {
+
+            //         this.setState({ lstDataList: _lstDataList });
+            //         this.rowselect(0);
+            //         this.CreateGrid();
+            //     }
+
+
+            // });
         }
     }
     handleNewClick() {
@@ -300,8 +326,6 @@ class calculate extends Component {
 
                 this.selected_row = iRowIdx;
                 let cust = this.state.lstDataList[iRowIdx];
-alert(cust["materialsid"]);
-alert(cust["newmaterialsid"]);
                 this.myDivid.value = cust["buildingstouserdetailid"];
                 this.myDivObj.value = cust["objectsid"];
                 this.myDivMat.value = cust["materialsid"];
