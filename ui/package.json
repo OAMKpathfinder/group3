@@ -16,6 +16,7 @@
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
     "react-bootstrap": "^0.32.4",
+    "react-bootstrap-buttons": "^1.0.0",
     "react-data-grid": "^5.0.5",
     "react-dom": "^16.12.0",
     "react-glider-carousel": "^0.1.2",
