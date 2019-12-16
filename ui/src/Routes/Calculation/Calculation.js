@@ -1,62 +1,59 @@
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
-import ReactDataGrid from "react-data-grid";
+import ReactDataGrid from 'react-data-grid';
 import axios from 'axios';
 import './Calculation.css';
-const baseclsUrl = 'https://pathfinderserverrestapi.azurewebsites.net//buildingstouserdetail/gtdet/19';
-
+const baseclsUrl =
+  'https://pathfinderserverrestapi.azurewebsites.net//buildingstouserdetail/gtdet/19';
 
 const columns = [
-    {
-        key: "buildingstouserdetailid",
-        name: "ID",
-        width: 50
-    },
-    {
-        key: "objectname",
-        name: "Object name",
+  {
+    key: 'buildingstouserdetailid',
+    name: 'ID',
+    width: 150,
+  },
+  {
+    key: 'objectname',
+    name: 'Object name',
 
-        width: 150
-    },
-    {
-        key: "curmatname",
-        name: "Present Material",
-        width: 150
-
-    },
-    {
-        key: "newmatname",
-        name: "New Material",
-        width: 150
-    },
-    {
-        key: "numberofobjects",
-        name: "Objects No",
-        width: 100
-    },
-    {
-        key: "objectarea",
-        name: "Object area",
-        width: 100
-    },
-    {
-        key: "presentvalue",
-        name: "Current Value",
-        width: 100
-    },
-    {
-        key: "newvalue",
-        name: "New Value",
-        width: 100
-    },
-
+    width: 250,
+  },
+  {
+    key: 'curmatname',
+    name: 'Present Material',
+    width: 300,
+  },
+  {
+    key: 'newmatname',
+    name: 'New Material',
+    width: 150,
+  },
+  {
+    key: 'numberofobjects',
+    name: 'Objects No',
+    width: 150,
+  },
+  {
+    key: 'objectarea',
+    name: 'Object area',
+    width: 150,
+  },
+  {
+    key: 'presentvalue',
+    name: 'Current Value',
+    width: 150,
+  },
+  {
+    key: 'newvalue',
+    name: 'New Value',
+    width: 150,
+  }
 ];
 const urls = [
     'https://pathfinderserverrestapi.azurewebsites.net/objects',
     'https://pathfinderserverrestapi.azurewebsites.net/materials',
     'https://pathfinderserverrestapi.azurewebsites.net//buildingstouserdetail/gtdet/19'
 ];
-
 
 
 class calculate extends Component {
@@ -287,22 +284,19 @@ class calculate extends Component {
             console.log(err);
           });
 
-         
-          
-
-
     }
-
-    getObjectsList() {
-        axios.get('https://pathfinderserverrestapi.azurewebsites.net/objects').then(res => {
-            const _lstDataList = res.data;
-            if (_lstDataList.length > 0) {
-                this.lstObjectDataList = _lstDataList;
-            }
-
-
+    if (this.frmStatus === 0) {
+      axios
+        .put(
+          'https://pathfinderserverrestapi.azurewebsites.net/buildingstouserdetail/' +
+            this.myDivid.value,
+          PostData,
+        )
+        .then(res => {
+          this.getDataList();
         });
     }
+
     getMaterialList() {
         axios.get('https://pathfinderserverrestapi.azurewebsites.net/materials').then(res => {
             const _lstDataList = res.data;
@@ -432,6 +426,113 @@ class calculate extends Component {
             </div>
         );
     }
+  }
+
+  render() {
+    return (
+      <div className="mainDiv_">
+        <div className="Top_">
+          <table className="tblsMain_">
+            <tbody>
+              <tr className="trbtn_">
+                <td className="trbtn_">
+                  <button
+                    className="btn btn-dark btn-lg btn-block"
+                    onClick={this.handleNewClick}
+                    ref={c => (this.btnNew = c)}
+                  >
+                    New
+                  </button>
+                </td>
+
+                <td className="trbtn_">
+                  <button
+                    className="btn btn-danger btn-lg btn-block"
+                    onClick={this.handleDelClick}
+                    ref={c => (this.btnDel = c)}
+                  >
+                    Delete
+                  </button>
+                </td>
+                <td className="trbtn_">
+                  <button
+                    className="btn btn-success btn-lg btn-block"
+                    onClick={this.handleSaveClick}
+                    ref={c => (this.btnSave = c)}
+                  >
+                    Save
+                  </button>
+                </td>
+                <td className="trbtn_">
+                  <button
+                    className="btn btn-secondary btn-lg btn-block"
+                    onClick={this.handleCancelClick}
+                    ref={c => (this.btnCancel = c)}
+                  >
+                    Cancel
+                  </button>
+                </td>
+              </tr>
+              <tr className="trElm_">
+                <td className="tdElements_">
+                  <tr>
+                    <td className="td_">Type Id</td>
+                    <td>
+                      <input
+                        type="number"
+                        name="idField"
+                        ref={c => (this.myDivid = c)}
+                        style={{ width: 100, borderColor: 'gray', borderWidth: 1 }}
+                        disabled
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="td_">Abbreviation</td>
+                    <td>
+                      <select ref={c => (this.myDivMat = c)}>
+                        {this.lstMaterialsDataList.map(team => (
+                          <option key={team.materialname} value={team.materialsid}>
+                            {team.materialname}
+                          </option>
+                        ))}
+                      </select>
+
+                      {/* <input type="text" name="abbreviation" ref={c => this.myDivAbbr = c} style={{ width: 100, borderColor: 'gray', borderWidth: 1 }} disabled /> */}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="td_">Object name</td>
+                    <td>
+                      <input
+                        type="text"
+                        name="objectname"
+                        ref={c => (this.myDivName = c)}
+                        style={{ width: 200, borderColor: 'gray', borderWidth: 1 }}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="td_">formula</td>
+                    <td>
+                      <textarea
+                        name="formula"
+                        ref={c => (this.myDivformula = c)}
+                        style={{ height: 150, width: 400, borderColor: 'gray', borderWidth: 1 }}
+                      />
+                    </td>
+                  </tr>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div className="Bot_">
+          <this.CreateGrid />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default calculate;

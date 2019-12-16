@@ -71,8 +71,7 @@ const useStyles = makeStyles(theme => ({
     height: 140,
   },
   link: {
-    textDecoration: 'none',
-    textColor: '#29293d'
+    textDecoration: 'none'
   },
   brand:{
     backgroundColor: '#29293d'
@@ -106,8 +105,8 @@ export default function ScrollableTabsButtonAuto() {
             className={classes.link}
             value={value}
             onChange={handleChange}
-            indicatorColor="#29293d"
-            textColor="#29293d"
+            indicatorColor="primary"
+            textColor="primary"
             variant="scrollable"
             scrollButtons="auto"
             aria-label="scrollable auto tabs example"
