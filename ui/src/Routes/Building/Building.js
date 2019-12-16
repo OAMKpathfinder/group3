@@ -5,6 +5,18 @@ import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import './Building.css';
+import List from '@material-ui/core/List';
+import BubbleChartIcon from '@material-ui/icons/BubbleChart';
+import FormatColorTextIcon from '@material-ui/icons/FormatColorText';
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
+import Typography from '@material-ui/core/Typography';
+import ListItem from '@material-ui/core/ListItem';
+import Paper from '@material-ui/core/Paper';
+import Avatar from '@material-ui/core/Avatar';
+import MaterSlider from './Buildings.js'
+import BatteryCharging50Icon from '@material-ui/icons/BatteryCharging50';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Card from '@material-ui/core/Card';
 
 const baseclsUrl = 'https://pathfinderserverrestapi.azurewebsites.net/buildingtypes';
@@ -175,65 +187,129 @@ class building extends Component {
       <div className="container">
         <Grid container spacing={3}>
           <Grid item xs={5}>
-            <Card className="card">
-              <div className="card_content">
-                <div className="input-field">
-                  <input type="number" name="idField" ref={c => (this.myDivid = c)} disabled />
-                  <label for="password">ID</label>
-                </div>
-                <div className="input-field">
-                  <input type="text" name="abbreviation" ref={c => (this.myDivAbbr = c)} disabled />
-                  <label>Abbreviation</label>
-                </div>
-                <div className="input-field">
-                  <input type="text" name="typename" ref={c => (this.myDivName = c)} />
-                  <label>Building type</label>
-                </div>
-                <div className="input-field">
-                  <input name="formula" ref={c => (this.myDivformula = c)} />
-                  <label>Formula</label>
-                </div>
-                <Button
-                  variant="contained"
-                  className="btn"
-                  color="primary"
-                  onClick={this.handleNewClick}
-                  ref={c => (this.btnNew = c)}
-                >
-                  New
-                </Button>
-                <Button
-                  variant="contained"
-                  className="btn"
-                  color="primary"
-                  onClick={this.handleDelClick}
-                  ref={c => (this.btnDel = c)}
-                >
-                  Delete
-                </Button>
-                <Button
-                  variant="contained"
-                  className="btn"
-                  color="secondary"
-                  onClick={this.handleSaveClick}
-                  ref={c => (this.btnSave = c)}
-                >
-                  Save
-                </Button>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  className="btn"
-                  onClick={this.handleCancelClick}
-                  ref={c => (this.btnCancel = c)}
-                >
-                  Cancel
-                </Button>
+            <Paper className="paper2">
+              <div className="paper-content">
+                <Typography variant="h6" component="h3">
+                  Building types:
+                </Typography>
+                <Typography variant="caption" component="p">
+                  This page gives you an opportunity to add, edit or delete building types that
+                  Pathfinder offers for calculation.
+                </Typography>
+                <List className="list">
+                  <ListItem className="list-item">
+                    <ListItemAvatar>
+                      <Avatar className="house">
+                        <AssignmentTurnedInIcon />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText>
+                      <div className="input-field">
+                        <input
+                          type="number"
+                          name="idField"
+                          ref={c => (this.myDivid = c)}
+                          disabled
+                        />
+                        <label for="password">ID</label>
+                      </div>
+                    </ListItemText>
+                  </ListItem>
+                  <ListItem className="list-item">
+                    <ListItemAvatar>
+                      <Avatar className="area">
+                        <FormatColorTextIcon />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText>
+                      <div className="input-field">
+                        <input
+                          type="text"
+                          name="abbreviation"
+                          ref={c => (this.myDivAbbr = c)}
+                          disabled
+                        />
+                        <label>Abbreviation</label>
+                      </div>
+                    </ListItemText>
+                  </ListItem>
+                  <ListItem className="list-item">
+                    <ListItemAvatar className="energy">
+                      <Avatar>
+                        <BubbleChartIcon />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText>
+                      <div className="input-field">
+                        <input type="text" name="typename" ref={c => (this.myDivName = c)} />
+                        <label>Building type</label>
+                      </div>
+                    </ListItemText>
+                  </ListItem>
+                  <ListItem className="list-item">
+                    <ListItemAvatar className="energy">
+                      <Avatar>
+                        <BatteryCharging50Icon />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText>
+                      <div className="input-field">
+                        <input name="formula" ref={c => (this.myDivformula = c)} />
+                        <label>Formula</label>
+                      </div>
+                    </ListItemText>
+                  </ListItem>
+                  <ListItem className="list-item">
+                    <ListItemText>
+                      <Button
+                        variant="contained"
+                        className="btn2"
+                        color="primary"
+                        onClick={this.handleNewClick}
+                        ref={c => (this.btnNew = c)}
+                      >
+                        New
+                      </Button>
+
+                      <Button
+                        variant="contained"
+                        className="btn2"
+                        color="primary"
+                        onClick={this.handleDelClick}
+                        ref={c => (this.btnDel = c)}
+                      >
+                        Delete
+                      </Button>
+
+                      <Button
+                        variant="contained"
+                        className="btn2"
+                        color="secondary"
+                        onClick={this.handleSaveClick}
+                        ref={c => (this.btnSave = c)}
+                      >
+                        Save
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        className="btn2"
+                        onClick={this.handleCancelClick}
+                        ref={c => (this.btnCancel = c)}
+                      >
+                        Cancel
+                      </Button>
+                    </ListItemText>
+                  </ListItem>
+                </List>
               </div>
-            </Card>
+            </Paper>
           </Grid>
           <Grid item xs={7}>
             <Card className="card">
+              <div className="slider2">
+                <MaterSlider />
+              </div>
               <this.CreateGrid />
             </Card>
           </Grid>
