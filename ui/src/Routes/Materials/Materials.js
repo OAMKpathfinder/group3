@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
-import LayersIcon from '@material-ui/icons/Layers';
+import MaterSlider from './MaterSlider.js'
 import BatteryCharging50Icon from '@material-ui/icons/BatteryCharging50';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -183,11 +183,10 @@ class materials extends Component {
             <Paper className="paper1">
               <div className="paper-content">
                 <Typography variant="h6" component="h3">
-                  Building information:
+                  Materials:
                 </Typography>
                 <Typography variant="caption" component="p">
-                  A condominium is one of a group of housing units where the homeowners own their
-                  individual unit space, and all the dwellings share ownership of common use areas.
+                 This page gives you an opportunity to add, edit or delete materials that Pathfinder offers for calculation.
                 </Typography>
                 <List className="list">
                   <ListItem className="list-item">
@@ -315,6 +314,9 @@ class materials extends Component {
           </Grid>
           <Grid item xs={7}>
             <Card className="card">
+              <div className="slider1">
+                <MaterSlider />
+              </div>
               <this.CreateGrid />
             </Card>
           </Grid>
