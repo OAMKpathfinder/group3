@@ -3,7 +3,7 @@
  }
  .input-field{
    position: relative;
-   margin: 20px;
+   margin: 10px;
    border-radius: 5px;
    width: 150px;
  }
@@ -19,9 +19,9 @@
    transition: all 0.2s ease-in-out;
    top: 0;
    border-radius: 5px;
-   font-size: 18px;
-   left: 4px;
-     background-color: white;
+   font-size: 14px;
+   left: 14px;
+     background-color:white;
   }
  
  
@@ -37,7 +37,7 @@
   .input-field input:focus + label{
     top: 0;
     font-size: 12px;
-    left: 4px;
+    left: 14px;
       background-color: white;
   }
  
@@ -55,6 +55,14 @@
     margin-top: 20px;
   }
  
-  .btn {
-    margin: 10px !important;
+  .btn1 {
+    margin: 5px !important;
+    width: 105px;
+  }
+
+  .paper1{
+    background-color:rgba(192,192,192,0.3) !important;
+    margin: 20px;
+    width: 100%;
+    height: 100%;
   }
