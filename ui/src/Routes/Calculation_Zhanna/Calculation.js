@@ -196,11 +196,6 @@ function Result() {
                 id="standard-basic"
                 label="Area of the building"
               />
-              <div className="slider">
-                <Typography id="discrete-slider" gutterBottom>
-                  Number of rooms
-                </Typography>
-              </div>
             </div>
             <br></br>
             <Divider />

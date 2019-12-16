@@ -1,7 +1,31 @@
-.card {
-  margin-top: '20px';
+.list{
   width: '100%';
-  margin: '5px';
+  max-width: 360;
+}
+.list-item{
+  padding-left: 0 !important;
+}
+.paper{
+  background-color:rgba(192,192,192,0.3) !important;
+  margin: 20px;
+  width: 100%;
+  height: 380px
+}
+.paper-content{
+  margin: 20px;
+  margin-top: 10px;
+}
+img {
+  width: 100%;
+  height: 300px,
+}
+.card-build{
+  margin: 20px;
+  margin-top: 55px;
+  width: 100%;
+}
+.media{
+  height: '140px';
 }
 .results {
   margin: '30px';
@@ -18,10 +42,34 @@
   margin: '50px';
   width: '80%';
 }
-.area {
-  color: '#fff';
-  background-color: '#993300';
+.energy {
+  color: '#fff' !important;
+  background-color: '#ff471a' !important;
+}
+
+.house {
+  color: '#fff' !important;
+  background-color: '#008000' !important;
   margin: '10px';
 }
-.av {
+
+.area {
+  color: '#fff' !important;
+  background-color: '#002080' !important;
+  margin: '10px';
+}
+
+.chart{
+  margin: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.card {
+  margin: 10px;
+}
+
+.card1 {
+  margin: 10px;
+  margin-top: 40px;
 }

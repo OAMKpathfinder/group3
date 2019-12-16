@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Calculate from './Routes/Calculation/Calculation';
 import Objects from './Routes/Objects/Objects';
 import Building from './Routes/Building/Building';
+import 'typeface-roboto';
 import Materials from './Routes/Materials/Materials';
 import Results from './Routes/Calculation_Zhanna/Calculation.js';
 import CalcResults from './Routes/CalcResult/Results.js';
