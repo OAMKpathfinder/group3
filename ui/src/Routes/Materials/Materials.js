@@ -6,6 +6,18 @@ import './Materials.css';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
+import List from '@material-ui/core/List';
+import BubbleChartIcon from '@material-ui/icons/BubbleChart';
+import FormatColorTextIcon from '@material-ui/icons/FormatColorText';
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
+import Typography from '@material-ui/core/Typography';
+import ListItem from '@material-ui/core/ListItem';
+import Paper from '@material-ui/core/Paper';
+import Avatar from '@material-ui/core/Avatar';
+import MaterSlider from './MaterSlider.js'
+import BatteryCharging50Icon from '@material-ui/icons/BatteryCharging50';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 const baseclsUrl = 'https://pathfinderserverrestapi.azurewebsites.net/materials';
 
 const columns = [
@@ -168,93 +180,143 @@ class materials extends Component {
       <div className="container">
         <Grid container spacing={3}>
           <Grid item xs={5}>
-            <Card className="card">
-              <div className="card_content">
-                <div className="input-field">
-                  <input
-                    type="number"
-                    name="idField"
-                    ref={c => (this.myDivid = c)}
-                    style={{ width: 100, borderColor: 'gray', borderWidth: 1 }}
-                    disabled
-                  />
-                  <label>ID</label>
-                </div>
+            <Paper className="paper1">
+              <div className="paper-content">
+                <Typography variant="h6" component="h3">
+                  Materials:
+                </Typography>
+                <Typography variant="caption" component="p">
+                 This page gives you an opportunity to add, edit or delete materials that Pathfinder offers for calculation.
+                </Typography>
+                <List className="list">
+                  <ListItem className="list-item">
+                    <ListItemAvatar>
+                      <Avatar className="house">
+                        <AssignmentTurnedInIcon />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText>
+                      <div className="input-field">
+                        <input
+                          type="number"
+                          name="idField"
+                          ref={c => (this.myDivid = c)}
+                          style={{ width: 150 }}
+                          disabled
+                        />
+                        <label>ID</label>
+                      </div>
+                    </ListItemText>
+                  </ListItem>
+                  <ListItem className="list-item">
+                    <ListItemAvatar>
+                      <Avatar className="area">
+                        <FormatColorTextIcon />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText>
+                      <div className="input-field">
+                        <input
+                          type="text"
+                          name="abbreviation"
+                          ref={c => (this.myDivAbbr = c)}
+                          style={{ width: 150 }}
+                          disabled
+                        />
+                        <label>Abbreviation</label>
+                      </div>
+                    </ListItemText>
+                  </ListItem>
+                  <ListItem className="list-item">
+                    <ListItemAvatar className="energy">
+                      <Avatar>
+                        <BubbleChartIcon/>
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText>
+                      <div className="input-field">
+                        <input
+                          type="text"
+                          name="materialname"
+                          ref={c => (this.myDivName = c)}
+                          style={{ width: 200, borderColor: 'gray', borderWidth: 1 }}
+                        />
+                        <label>Material</label>
+                      </div>
+                    </ListItemText>
+                  </ListItem>
+                  <ListItem className="list-item">
+                    <ListItemAvatar className="energy">
+                      <Avatar>
+                        <BatteryCharging50Icon />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText>
+                      <div className="input-field">
+                        <input
+                          type="number"
+                          placeholder="0.00"
+                          step="0.01"
+                          name="coefficient"
+                          ref={c => (this.myDivcoefficient = c)}
+                          style={{ width: 200, borderColor: 'gray', borderWidth: 1 }}
+                        />
+                        <label>U-Value</label>
+                      </div>
+                    </ListItemText>
+                  </ListItem>
+                  <ListItem className="list-item">
+                    <ListItemText>
+                      <Button
+                        variant="contained"
+                        className="btn1"
+                        color="primary"
+                        onClick={this.handleNewClick}
+                        ref={c => (this.btnNew = c)}
+                      >
+                        New
+                      </Button>
 
-                <div className="input-field">
-                  <input
-                    type="text"
-                    name="abbreviation"
-                    ref={c => (this.myDivAbbr = c)}
-                    style={{ width: 100, borderColor: 'gray', borderWidth: 1 }}
-                    disabled
-                  />
-                  <label>Abbreviation</label>
-                </div>
-                <div className="input-field">
-                  <input
-                    type="text"
-                    name="materialname"
-                    ref={c => (this.myDivName = c)}
-                    style={{ width: 200, borderColor: 'gray', borderWidth: 1 }}
-                  />
-                  <label>Material</label>
-                </div>
-                <div className="input-field">
-                  <input
-                    type="number"
-                    placeholder="0.00"
-                    step="0.01"
-                    name="coefficient"
-                    ref={c => (this.myDivcoefficient = c)}
-                    style={{ width: 200, borderColor: 'gray', borderWidth: 1 }}
-                  />
-                  <label>U-Value</label>
-                </div>
-                <Button
-                  variant="contained"
-                  className="btn"
-                  color="primary"
-                  onClick={this.handleNewClick}
-                  ref={c => (this.btnNew = c)}
-                >
-                  New
-                </Button>
+                      <Button
+                        variant="contained"
+                        className="btn1"
+                        color="primary"
+                        onClick={this.handleDelClick}
+                        ref={c => (this.btnDel = c)}
+                      >
+                        Delete
+                      </Button>
 
-                <Button
-                  variant="contained"
-                  className="btn"
-                  color="primary"
-                  onClick={this.handleDelClick}
-                  ref={c => (this.btnDel = c)}
-                >
-                  Delete
-                </Button>
+                      <Button
+                        variant="contained"
+                        className="btn1"
+                        color="primary"
+                        onClick={this.handleSaveClick}
+                        ref={c => (this.btnSave = c)}
+                      >
+                        Save
+                      </Button>
 
-                <Button
-                  variant="contained"
-                  className="btn"
-                  color="primary"
-                  onClick={this.handleSaveClick}
-                  ref={c => (this.btnSave = c)}
-                >
-                  Save
-                </Button>
-
-                <Button
-                  variant="contained"
-                  className="btn"
-                  color="primary"
-                  onClick={this.handleCancelClick}
-                  ref={c => (this.btnCancel = c)}
-                >
-                  Cancel
-                </Button>
+                      <Button
+                        variant="contained"
+                        className="btn1"
+                        color="primary"
+                        onClick={this.handleCancelClick}
+                        ref={c => (this.btnCancel = c)}
+                      >
+                        Cancel
+                      </Button>
+                    </ListItemText>
+                  </ListItem>
+                </List>
               </div>
-            </Card>
+            </Paper>
           </Grid>
           <Grid item xs={7}>
             <Card className="card">
+              <div className="slider1">
+                <MaterSlider />
+              </div>
               <this.CreateGrid />
             </Card>
           </Grid>
