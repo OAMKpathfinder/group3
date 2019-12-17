@@ -49,15 +49,11 @@ function Buildings() {
                   Cottage (historic)
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                  Lizards are a widespread group of squamate reptiles, with over 6,000 species,
-                  ranging across all continents except Antarctica
+                  A small house, usually in the countryside, a historic construction
                 </Typography>
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <Button size="small" color="primary">
-                Save
-              </Button>
               <Button size="small" color="primary">
                 Manual
               </Button>
@@ -75,17 +71,15 @@ function Buildings() {
                   Single family (detached)
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                  Lizards are a widespread group of squamate reptiles, with over 6,000 species,
-                  ranging across all continents except Antarctica
+                  A stand-alone house is a free-standing residential building. It is sometimes
+                  referred to as a single-family home, as opposed to a multi-family residential
+                  dwelling.
                 </Typography>
               </CardContent>
             </CardActionArea>
             <CardActions>
               <Button size="small" color="primary">
-                Share
-              </Button>
-              <Button size="small" color="primary">
-                Learn More
+                Manual
               </Button>
             </CardActions>
           </Card>
@@ -101,17 +95,16 @@ function Buildings() {
                   Townhome (historic)
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                  Lizards are a widespread group of squamate reptiles, with over 6,000 species,
-                  ranging across all continents except Antarctica
+                  Historically, a townhouse was the city residence of a noble or wealthy family, who
+                  would own one or more country houses in which they lived for much of the year.
+                  From the 18th century, landowners and their servants would move to a townhouse
+                  during the social season (when major balls took place).
                 </Typography>
               </CardContent>
             </CardActionArea>
             <CardActions>
               <Button size="small" color="primary">
-                Share
-              </Button>
-              <Button size="small" color="primary">
-                Learn More
+                Manual
               </Button>
             </CardActions>
           </Card>
@@ -127,17 +120,16 @@ function Buildings() {
                   Condominium (historic)
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                  Lizards are a widespread group of squamate reptiles, with over 6,000 species,
-                  ranging across all continents except Antarctica
+                  Unlike apartments, which are leased by their tenants, condominium units are owned
+                  outright. ... Scholars have traced the earliest known use of the condominium form
+                  of tenure to a document from first-century Babylon. The word condominium
+                  originated in Latin.
                 </Typography>
               </CardContent>
             </CardActionArea>
             <CardActions>
               <Button size="small" color="primary">
-                Share
-              </Button>
-              <Button size="small" color="primary">
-                Learn More
+                Manual
               </Button>
             </CardActions>
           </Card>
@@ -153,17 +145,15 @@ function Buildings() {
                   Apartment
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                  Lizards are a widespread group of squamate reptiles, with over 6,000 species,
-                  ranging across all continents except Antarctica
+                  An apartment (American English), or flat (British English, Indian English) is a
+                  self-contained housing unit (a type of residential real estate) that occupies only
+                  part of a building, generally on a single storey.
                 </Typography>
               </CardContent>
             </CardActionArea>
             <CardActions>
               <Button size="small" color="primary">
-                Share
-              </Button>
-              <Button size="small" color="primary">
-                Learn More
+                Manual
               </Button>
             </CardActions>
           </Card>
