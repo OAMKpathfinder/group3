@@ -58,10 +58,9 @@ var buildingstouser =
     },
     updatebuildingstouser: function (buildingstouserid, buildingstouser, callback) {
 
-        var queryString = "update materials set " +
+        var queryString = "update buildingstouser set " +
             "buildingage=" + buildingstouser.buildingage + "," +
-            "presentvalue=" + buildingstouser.presentvalue + "," +
-            "newvalue=" + buildingstouser.newvalue + 
+            "buildingtypeid=" + buildingstouser.buildingtypeid +
             " where buildingstouserid=" + buildingstouserid + ";";
         console.log(queryString);
 

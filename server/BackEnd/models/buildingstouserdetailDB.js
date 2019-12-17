@@ -56,6 +56,21 @@ var buildingstouserdetail =
         return client.query(queryString, callback);
     }
     ,
+    getbuildingstouserdetailByMasterid: function (buildingstouserid, callback) {
+       
+        var queryString = 'SELECT bdsd.buildingstouserdetailid, bdsd.buildingstouserid, bdsd.objectsid, bdsd.materialsid, ' +
+            '    bdsd.numberofobjects, bdsd.objectarea, bdsd.presentvalue, bdsd.newvalue, bdsd.newmaterialsid, ' +
+            '    obj.objectname, orgmat.materialname curmatname, newmat.materialname newmatname  ' +
+            'FROM buildingstouserdetail bdsd ' +
+            'inner join Objects Obj on obj.objectsid = bdsd.objectsid ' +
+            'left join materials orgmat on orgmat.materialsid = bdsd.materialsid ' +
+            'left join materials newmat on newmat.materialsid = bdsd.newmaterialsid ' +
+            'where bdsd.buildingstouserid = ' + buildingstouserid + '; ';
+
+        console.log(queryString);
+        return client.query(queryString, callback);
+    }
+    ,
     addbuildingstouserdetail: function (buildingstouserdetail, callback) {
         var queryString = "insert into buildingstouserdetail (buildingstouserid, objectsid, materialsid, numberofobjects, objectarea, newmaterialsid )  values( " +
             buildingstouserdetail.buildingstouserid + "," +
@@ -78,11 +93,11 @@ var buildingstouserdetail =
     updatebuildingstouserdetail: function (buildingstouserdetailid, buildingstouserdetail, callback) {
 
         var queryString = "update buildingstouserdetail set " +
-            "objectsid=" + buildingstouser.objectsid + "," +
-            "materialsid=" + buildingstouser.materialsid + "," +
-            "numberofobjects=" + buildingstouser.numberofobjects + "," +
-            "objectarea=" + buildingstouser.objectarea + "," +
-            "newmaterialsid=" + buildingstouser.newmaterialsid + 
+            "objectsid=" + buildingstouserdetail.objectsid + "," +
+            "materialsid=" + buildingstouserdetail.materialsid + "," +
+            "numberofobjects=" + buildingstouserdetail.numberofobjects + "," +
+            "objectarea=" + buildingstouserdetail.objectarea + "," +
+            "newmaterialsid=" + buildingstouserdetail.newmaterialsid + 
             " where buildingstouserdetailid=" + buildingstouserdetailid + ";";
         console.log(queryString);
 

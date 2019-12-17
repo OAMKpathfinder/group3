@@ -36,7 +36,7 @@ var materials =
         //});
         
         return client.query(
-            'select * from materials;', callback);
+            'select mat.materialsid, mat.abbreviation, mat.coefficient, mat.materialname from materials mat order by mat.abbreviation ;', callback);
     }
     ,
     getmaterilasByid: function (materialsid, callback) {
