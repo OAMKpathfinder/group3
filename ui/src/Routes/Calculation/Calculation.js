@@ -7,6 +7,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Buildings from './Buildings.js';
 import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
 import BubbleChartIcon from '@material-ui/icons/BubbleChart';
 import FormatColorTextIcon from '@material-ui/icons/FormatColorText';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
@@ -362,26 +363,7 @@ class calculate extends Component {
                     Pathfinder offers for calculation.
                   </Typography>
                   <List className="list">
-                    <ListItem className="list-item">
-                      <ListItemAvatar >
-                        <Avatar className="one">
-                          <AssignmentTurnedInIcon />
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText>
-                        <div className="input-field">
-                          <input
-                            type="number"
-                            name="idField"
-                            ref={c => (this.myDivid = c)}
-                            style={{ width: 250 }}
-                            disabled
-                          />
-                          <label>ID</label>
-                        </div>
-                      </ListItemText>
-                    </ListItem>
-                    <ListItem className="list-item">
+                  <ListItem className="list-item">
                       <ListItemAvatar>
                         <Avatar className="two">
                           <HomeIcon />
@@ -403,6 +385,26 @@ class calculate extends Component {
                             </option>
                           ))}
                         </select>
+                      </ListItemText>
+                    </ListItem>
+                    <Divider />
+                    <ListItem className="list-item">
+                      <ListItemAvatar >
+                        <Avatar className="one">
+                          <AssignmentTurnedInIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText>
+                        <div className="input-field">
+                          <input
+                            type="number"
+                            name="idField"
+                            ref={c => (this.myDivid = c)}
+                            style={{ width: 250 }}
+                            disabled
+                          />
+                          <label>ID</label>
+                        </div>
                       </ListItemText>
                     </ListItem>
                     <ListItem className="list-item">
