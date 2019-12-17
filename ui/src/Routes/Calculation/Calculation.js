@@ -335,8 +335,8 @@ class calculate extends Component {
         //alert( JSON.stringify(this.lstBldToUser) );
         let butus = this.lstBldToUser[0];
         this.myDivBudType.value = butus['buildingtypeid'];
-        this.myDiNewVal.value = butus['newvalue'];
-        this.myDivPrVal.value = butus['presentvalue'];
+        // this.myDiNewVal.value = butus['newvalue'];
+        // this.myDivPrVal.value = butus['presentvalue'];
       }
     }
   }
