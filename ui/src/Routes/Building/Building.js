@@ -6,7 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import './Building.css';
 import List from '@material-ui/core/List';
-import BubbleChartIcon from '@material-ui/icons/BubbleChart';
 import FormatColorTextIcon from '@material-ui/icons/FormatColorText';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import Typography from '@material-ui/core/Typography';

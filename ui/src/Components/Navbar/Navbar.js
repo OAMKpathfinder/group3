@@ -135,13 +135,6 @@ export default function ScrollableTabsButtonAuto() {
             {...a11yProps(3)}
             to="/calculate"
           />
-          <Tab
-            className="tab"
-            label="Result"
-            component={Link}
-            {...a11yProps(4)}
-            to="/result"
-          />
         </Tabs>
       </AppBar>
     </div>

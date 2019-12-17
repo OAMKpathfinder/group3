@@ -7,7 +7,6 @@ import Objects from './Routes/Objects/Objects';
 import Building from './Routes/Building/Building';
 import 'typeface-roboto';
 import Materials from './Routes/Materials/Materials';
-import Results from './Routes/Calculation_Zhanna/Calculation.js';
 import CalcResults from './Routes/CalcResult/Results.js';
 
 function App({ children }) {
@@ -19,8 +18,7 @@ function App({ children }) {
           <Route path="/objects" exact component={Objects} />
           <Route path="/materials" exact component={Materials} />
           <Route path="/calculate" exact component={Calculate} />
-          <Route path="/result" exact component={Results} />
-          <Route path="/result/1" exact component={CalcResults} />
+          <Route path="/result" exact component={CalcResults} />
         </Switch>
         <Footer />
     </Router>
