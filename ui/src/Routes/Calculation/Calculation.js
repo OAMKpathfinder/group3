@@ -1,8 +1,28 @@
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
 import ReactDataGrid from 'react-data-grid';
+import Card from '@material-ui/core/Card';
+import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import Buildings from './Buildings.js';
+import List from '@material-ui/core/List';
+import BubbleChartIcon from '@material-ui/icons/BubbleChart';
+import FormatColorTextIcon from '@material-ui/icons/FormatColorText';
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
+import Typography from '@material-ui/core/Typography';
+import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
+import ListItem from '@material-ui/core/ListItem';
+import Filter1Icon from '@material-ui/icons/Filter1';
+import Paper from '@material-ui/core/Paper';
+import Avatar from '@material-ui/core/Avatar';
+import HomeIcon from '@material-ui/icons/Home';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Button from '@material-ui/core/Button';
 import './Calculation.css';
+
+// eslint-disable-next-line
 const baseclsUrl =
   'https://pathfinderserverrestapi.azurewebsites.net//buildingstouserdetail/gtdet/19';
 
@@ -30,8 +50,8 @@ const columns = [
   },
   {
     key: 'numberofobjects',
-    name: 'Objects No',
-    width: 100,
+    name: 'Number of Objects',
+    width: 150,
   },
   {
     key: 'objectarea',
@@ -41,14 +61,16 @@ const columns = [
   {
     key: 'presentvalue',
     name: 'Current Value',
-    width: 100,
+    width: 150,
   },
   {
     key: 'newvalue',
     name: 'New Value',
-    width: 100,
+    width: 150,
   },
 ];
+
+// eslint-disable-next-line
 const urls = [
   'https://pathfinderserverrestapi.azurewebsites.net/objects',
   'https://pathfinderserverrestapi.azurewebsites.net/materials',
@@ -128,11 +150,13 @@ class calculate extends Component {
   handleCalcClick() {
     if (this.frmStatus === 0) {
       Promise.all([
-        fetch('https://pathfinderserverrestapi.azurewebsites.net/buildingstouserdetail/bdusrclc/19'),
-        fetch('https://pathfinderserverrestapi.azurewebsites.net//buildingstouserdetail/gtdet/19')
-
+        fetch(
+          'https://pathfinderserverrestapi.azurewebsites.net/buildingstouserdetail/bdusrclc/19',
+        ),
+        fetch('https://pathfinderserverrestapi.azurewebsites.net//buildingstouserdetail/gtdet/19'),
       ])
         .then(async ([aa, bb]) => {
+          // eslint-disable-next-line
           const a = await aa.json();
           const b = await bb.json();
 
@@ -171,7 +195,7 @@ class calculate extends Component {
     axios
       .delete(
         'https://pathfinderserverrestapi.azurewebsites.net/buildingstouserdetail/' +
-        this.myDivid.value,
+          this.myDivid.value,
       )
       .then(res => {
         this.getDataList();
@@ -202,7 +226,7 @@ class calculate extends Component {
       axios
         .put(
           'https://pathfinderserverrestapi.azurewebsites.net/buildingstouserdetail/' +
-          this.myDivid.value,
+            this.myDivid.value,
           PostData,
         )
         .then(res => {
@@ -216,16 +240,13 @@ class calculate extends Component {
   butChange() {
     const PostData = {
       buildingtypeid: this.myDivBudType.value,
-      buildingage: 10
+      buildingage: 10,
     };
     axios
-        .put(
-          'https://pathfinderserverrestapi.azurewebsites.net/buildingstouser/19' ,
-          PostData,
-        )
-        .then(res => {
-          //this.getDataList();
-        });
+      .put('https://pathfinderserverrestapi.azurewebsites.net/buildingstouser/19', PostData)
+      .then(res => {
+        //this.getDataList();
+      });
   }
   getDataList() {
     // axios.get(baseclsUrl).then(res => {
@@ -259,7 +280,7 @@ class calculate extends Component {
       fetch('https://pathfinderserverrestapi.azurewebsites.net/objects'),
       fetch('https://pathfinderserverrestapi.azurewebsites.net/materials'),
       fetch('https://pathfinderserverrestapi.azurewebsites.net/buildingstouser/bdusr/19'),
-      fetch('https://pathfinderserverrestapi.azurewebsites.net/buildingtypes')
+      fetch('https://pathfinderserverrestapi.azurewebsites.net/buildingtypes'),
     ])
       .then(async ([aa, bb, cc, dd, ee]) => {
         const a = await aa.json();
@@ -322,174 +343,270 @@ class calculate extends Component {
 
   render() {
     return (
-      <div className="mainDiv_">
-        <div className="Top_">
-          <table className="tblsMain_">
-            <tbody>
-              <tr className="trbtn_">
-                <td className="trbtn_"></td>
-                <td className="trbtn_">
-                  <button onClick={this.handleNewClick} ref={c => (this.btnNew = c)}>
-                    New
-                  </button>
-                </td>
+      <div>
+        <Card className="card">
+          <Grid container spacing={3}>
+            <Grid item xs={5}>
+              <div>
+                <Buildings />
+              </div>
+            </Grid>
+            <Grid item xs={7}>
+              <Paper className="paper5">
+                <div className="paper-content">
+                  <Typography variant="h6" component="h3">
+                    Calculation:
+                  </Typography>
+                  <Typography variant="caption" component="p">
+                    This page gives you an opportunity to add, edit or delete building types that
+                    Pathfinder offers for calculation.
+                  </Typography>
+                  <List className="list">
+                    <ListItem className="list-item">
+                      <ListItemAvatar >
+                        <Avatar className="one">
+                          <AssignmentTurnedInIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText>
+                        <div className="input-field">
+                          <input
+                            type="number"
+                            name="idField"
+                            ref={c => (this.myDivid = c)}
+                            style={{ width: 250 }}
+                            disabled
+                          />
+                          <label>ID</label>
+                        </div>
+                      </ListItemText>
+                    </ListItem>
+                    <ListItem className="list-item">
+                      <ListItemAvatar>
+                        <Avatar className="two">
+                          <HomeIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText className="text">
+                        <Typography variant="body2" component="h2">
+                          Choose building type:
+                        </Typography>
+                        <select
+                          className="select-css"
+                          ref={c => (this.myDivBudType = c)}
+                          width={100}
+                          onChange={this.butChange}
+                        >
+                          {this.lstBuildingType.map(team => (
+                            <option key={team.typename} value={team.buildingtypeid}>
+                              {team.typename}
+                            </option>
+                          ))}
+                        </select>
+                      </ListItemText>
+                    </ListItem>
+                    <ListItem className="list-item">
+                      <ListItemAvatar >
+                        <Avatar className="three">
+                          <WbIncandescentIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText className="text">
+                        <Typography variant="body2" component="h2">
+                          Choose object:
+                        </Typography>
+                        <select className="select-css" ref={c => (this.myDivObj = c)}>
+                          {this.lstObjectDataList.map(team => (
+                            <option key={team.objectname} value={team.objectsid}>
+                              {team.objectname}
+                            </option>
+                          ))}
+                        </select>
+                      </ListItemText>
+                    </ListItem>
+                    <ListItem className="list-item">
+                      <ListItemAvatar>
+                        <Avatar className="four">
+                          <BubbleChartIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText className="text">
+                        <Typography variant="body2" component="h2">
+                          Choose material for the object:
+                        </Typography>
+                        <select className="select-css" ref={c => (this.myDivMat = c)} width={100}>
+                          {this.lstMaterialsDataList.map(team => (
+                            <option key={team.materialname} value={team.materialsid}>
+                              {team.materialname}
+                            </option>
+                          ))}
+                        </select>
+                      </ListItemText>
+                    </ListItem>
+                    <ListItem className="list-item ">
+                      <ListItemAvatar >
+                        <Avatar className="five">
+                          <BubbleChartIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText className="text">
+                        <Typography variant="body2" component="h2">
+                          Choose new material to compare:
+                        </Typography>
+                        <select className="select-css" ref={c => (this.myDivNewMat = c)}>
+                          {this.lstMaterialsDataList.map(team => (
+                            <option key={team.materialname} value={team.materialsid}>
+                              {team.materialname}
+                            </option>
+                          ))}
+                        </select>
+                      </ListItemText>
+                    </ListItem>
+                    <ListItem className="list-item">
+                      <ListItemAvatar >
+                        <Avatar className="six">
+                          <FormatColorTextIcon/>
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText>
+                        <div className="input-field">
+                          <input
+                            type="number"
+                            placeholder="0.00"
+                            step="0.01"
+                            name="objectarea"
+                            ref={c => (this.myDivArea = c)}
+                            style={{ width: 250 }}
+                          />
+                          <label>Area</label>
+                        </div>
+                      </ListItemText>
+                    </ListItem>
+                    <ListItem className="list-item">
+                      <ListItemAvatar >
+                        <Avatar className="seven">
+                          <Filter1Icon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText>
+                        <div className="input-field">
+                          <input
+                            type="number"
+                            placeholder="0"
+                            step="1"
+                            name="numberofobjects"
+                            ref={c => (this.myDivNumber = c)}
+                            style={{ width: 250 }}
+                          />
+                          <label>Number of objects</label>
+                        </div>
+                      </ListItemText>
+                    </ListItem>
+                    {/* <ListItem className="list-item">
+                      <ListItemAvatar>
+                        <Avatar className="house">
+                          <AssignmentTurnedInIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText>
+                        <p>present val</p>
+                        <div className="input-field">
+                          <input
+                            type="number"
+                            name="PresentVal"
+                            ref={c => (this.myDivPrVal = c)}
+                            style={{ width: 100, borderColor: 'gray', borderWidth: 1 }}
+                            disabled
+                          />
+                          <label for="password">Current Value</label>
+                        </div>
+                      </ListItemText>
+                    </ListItem>
+                    <ListItem className="list-item">
+                      <ListItemAvatar>
+                        <Avatar className="area">
+                          <FormatColorTextIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText>
+                        <p>new val</p>
+                        <div className="input-field">
+                          <input
+                            type="number"
+                            name="PresentVal"
+                            ref={c => (this.myDiNewVal = c)}
+                            style={{ width: 100, borderColor: 'gray', borderWidth: 1 }}
+                            disabled
+                          />
+                          <label>New value</label>
+                        </div>
+                      </ListItemText>
+                    </ListItem> */}
 
-                <td className="trbtn_">
-                  <button
-                    className="btn btn-danger btn-lg btn-block"
-                    onClick={this.handleDelClick}
-                    ref={c => (this.btnDel = c)}
-                  >
-                    Delete
-                  </button>
-                </td>
-                <td className="trbtn_">
-                  <button
-                    className="btn btn-success btn-lg btn-block"
-                    onClick={this.handleSaveClick}
-                    ref={c => (this.btnSave = c)}
-                  >
-                    Save
-                  </button>
-                </td>
-                <td className="trbtn_">
-                  <button
-                    className="btn btn-secondary btn-lg btn-block"
-                    onClick={this.handleCancelClick}
-                    ref={c => (this.btnCancel = c)}
-                  >
-                    Cancel
-                  </button>
-                </td>
-                <td className="trbtn_">
-                  <button
-                    className="btn btn-secondary btn-lg btn-block"
-                    onClick={this.handleCalcClick}
-                  >
-                    calculate
-                  </button>
-                </td>
-              </tr>
-              <tr className="trElm_">
-                <td className="tdElements_">
-                  <tr>
-                    <td className="td_">Building Type</td>
-                    <td>
-                      <select ref={c => (this.myDivBudType = c)} width={100} onChange={this.butChange}>
-                        {this.lstBuildingType.map(team => (
-                          <option key={team.typename} value={team.buildingtypeid}>
-                            {team.typename}
-                          </option>
-                        ))}
-                      </select>
-                    </td>
-                  </tr>
-                  <td className="td_">Present Value</td>
-                    <td>
-                      <input
-                        type="number"
-                        name="PresentVal"
-                        ref={c => (this.myDivPrVal = c)}
-                        style={{ width: 100, borderColor: 'gray', borderWidth: 1 }}
-                        disabled
-                      />
-                    </td>
-                    <td className="td_">New Value</td>
-                    <td>
-                      <input
-                        type="number"
-                        name="PresentVal"
-                        ref={c => (this.myDiNewVal = c)}
-                        style={{ width: 100, borderColor: 'gray', borderWidth: 1 }}
-                        disabled
-                      />
-                    </td>
-                  <tr>
-                    <td className="td_">Id</td>
-                    <td>
-                      <input
-                        type="number"
-                        name="idField"
-                        ref={c => (this.myDivid = c)}
-                        style={{ width: 100, borderColor: 'gray', borderWidth: 1 }}
-                        disabled
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="td_">Object </td>
-                    <td>
-                      <select ref={c => (this.myDivObj = c)}>
-                        {this.lstObjectDataList.map(team => (
-                          <option key={team.objectname} value={team.objectsid}>
-                            {team.objectname}
-                          </option>
-                        ))}
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="td_">Current material</td>
-                    <td>
-                      <select ref={c => (this.myDivMat = c)} width={100}>
-                        {this.lstMaterialsDataList.map(team => (
-                          <option key={team.materialname} value={team.materialsid}>
-                            {team.materialname}
-                          </option>
-                        ))}
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="td_">New material</td>
-                    <td>
-                      <select ref={c => (this.myDivNewMat = c)}>
-                        {this.lstMaterialsDataList.map(team => (
-                          <option key={team.materialname} value={team.materialsid}>
-                            {team.materialname}
-                          </option>
-                        ))}
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="td_">Area </td>
-                    <td>
-                      <input
-                        type="number"
-                        placeholder="0.00"
-                        step="0.01"
-                        name="objectarea"
-                        ref={c => (this.myDivArea = c)}
-                        style={{ width: 200, borderColor: 'gray', borderWidth: 1 }}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="td_">Number Of objects </td>
-                    <td>
-                      <input
-                        type="number"
-                        placeholder="0"
-                        step="1"
-                        name="numberofobjects"
-                        ref={c => (this.myDivNumber = c)}
-                        style={{ width: 200, borderColor: 'gray', borderWidth: 1 }}
-                      />
-                    </td>
-                  </tr>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div className="Bot_">
+                    <ListItem className="list-item">
+                      <ListItemText>
+                        <Button
+                          variant="contained"
+                          className="btn2"
+                          color="primary"
+                          onClick={this.handleNewClick}
+                          ref={c => (this.btnNew = c)}
+                        >
+                          New
+                        </Button>
+
+                        <Button
+                          variant="contained"
+                          className="btn2"
+                          color="primary"
+                          onClick={this.handleDelClick}
+                          ref={c => (this.btnDel = c)}
+                        >
+                          Delete
+                        </Button>
+
+                        <Button
+                          variant="contained"
+                          className="btn2"
+                          color="primary"
+                          onClick={this.handleSaveClick}
+                          ref={c => (this.btnSave = c)}
+                        >
+                          Save
+                        </Button>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          className="btn2"
+                          onClick={this.handleCancelClick}
+                          ref={c => (this.btnCancel = c)}
+                        >
+                          Cancel
+                        </Button>
+                        <Link to="/result">
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            className="btn2"
+                            onClick={this.handleCalcClick}
+                          >
+                            Calculate
+                          </Button>
+                        </Link>
+                      </ListItemText>
+                    </ListItem>
+                  </List>
+                </div>
+              </Paper>
+            </Grid>
+          </Grid>
+        </Card>
+        <Card className="card2">
           <this.CreateGrid />
-        </div>
+        </Card>
       </div>
     );
   }
 }
 
 export default calculate;
-

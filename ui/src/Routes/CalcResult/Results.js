@@ -10,7 +10,6 @@ import Graph from './Graph.js';
 import BatteryCharging50Icon from '@material-ui/icons/BatteryCharging50';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
-import CardHeader from '@material-ui/core/CardHeader';
 import ReactDataGrid from 'react-data-grid';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -69,6 +68,8 @@ const baseclsUrl =
       width: 100,
     },
   ];
+
+  // eslint-disable-next-line
   const urls = [
     'https://pathfinderserverrestapi.azurewebsites.net/objects',
     'https://pathfinderserverrestapi.azurewebsites.net/materials',
