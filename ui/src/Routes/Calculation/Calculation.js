@@ -224,6 +224,7 @@ class calculate extends Component {
         });
     }
     if (this.frmStatus === 0) {
+      alert( JSON.stringify(PostData) );
       axios
         .put(
           'https://pathfinderserverrestapi.azurewebsites.net/buildingstouserdetail/' +
@@ -231,6 +232,7 @@ class calculate extends Component {
           PostData,
         )
         .then(res => {
+        
           this.getDataList();
         });
     }
