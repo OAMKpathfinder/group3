@@ -583,7 +583,7 @@ class calculate extends Component {
                         >
                           Cancel
                         </Button>
-                        <Link to="/result/1">
+                        <Link to="/result">
                           <Button
                             variant="contained"
                             color="primary"
